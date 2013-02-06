@@ -1,0 +1,163 @@
+--- 
+title: Building a feed reader with AngularJS
+tags: 
+- Code
+- david
+meta: 
+  _edit_last: "1"
+status: publish
+layout: post
+type: post
+published: true
+---
+One of my friends had an idea for a real-time RSS feed reader and he asked me to implement it. The specifications were this: it should
+<ol>
+	<li>accept an RSS feed (will cover)</li>
+	<li>display items from that RSS feed in real time (will cover, partially)</li>
+	<li>allow the user to set items to a "read" state (will cover)</li>
+	<li>remember the user's "read" items</li>
+	<li>have a mark and clear read items button (will cover)</li>
+	<li>be able to toggle a light and dark theme (will cover)</li>
+	<li>have a user login system</li>
+</ol>
+I hadn't worked with a real Javascript MV* framework or something like Yeoman or Grunt, so I wanted to take a few real technologies and use them correctly. I spent a day looking at Knockout and coding up a few examples before looking at AngularJS and realizing the code was a lot neater and more intuitive for me. Then, I started looking into Backbone and thinking that I would use it, then ultimately switching back to Angular because it seemed lighterweight and I thought what really mattered was the two-way data binding. (I was also going to shamelessly use Twitter Bootstrap for styles.)
+
+As for a backend, I was somewhat set on using NodeJS instead of Ruby or Python since I have more JavaScript experience and have played around more in Node than Sinatra/Rails or Flask/Django.
+
+In the end, I'm pretty impressed with AngularJS and ssee how much it has reduced my codebase, though I realize it doesn't fix every problem I have.
+<h2>Accept an RSS feed</h2>
+AngularJS basically allows you to bind data values to HTML elements. If I had the following HTML:
+<pre>&lt;html ng-app&gt;
+...
+&lt;div ng-controller="RssFeedCtrl"&gt;
+
+&lt;div class='container-fluid margin-top'&gt;
+&lt;div class='span12'&gt;
+&lt;form class="form-horizontal"&gt;
+&lt;div class="control-group"&gt;
+&lt;input id='rssFeed' ng-model='rssFeed' type="text" placeholder="RSS Feed"&gt;
+&lt;button id='update' type="submit" class="btn" ng-click="updateModel()"&gt;Load feed&lt;/button&gt;
+&lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+...
+&lt;/html&gt;</pre>
+I would know that the input text-box #rssFeed will always be linked up to the variable located in $scope.rssFeed, as the ng-model attribute is set to rssFeed. So I can use this code:
+<pre>function RssFeedCtrl($scope) {
+	$scope.articles = [ ];
+	$scope.rssFeed = 'http://hnapp.com/api/items/rss/a817dd49f3fe75b6fc2764bd98b714f7';
+}</pre>
+to automatically populate #rssFeed. If I were to change the value in that text box, then I could see that altered value in my javascript in $scope.rssFeed.
+
+From the HTML, you'll also notice there's a button with an ng-click="updateModel()" attribute. So whenever the button is clicked, $scope.updateModel is called.
+<h2>Display items from that RSS feed in real time</h2>
+This code can then be used to populate $scope.articles:
+<pre>//converts from RSS object to an object we're interested in
+var parseEntry = function(el) {
+	var date = el.publishedDate || el.pubDate;
+	var content = el.content || el.description;
+	return { title: el.title, content: content, read: false, date: date, link: el.link, shortLink: hostname(el.link) };
+}
+
+//parses an RSS feed using Google API
+var parseRSS = function(url, callback) {
+	$.ajax({
+		url: '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&amp;num=50&amp;callback=?&amp;q=' + encodeURIComponent(url),
+		dataType: 'json',
+		success: callback
+	});
+}
+
+//called from button click
+$scope.updateModel = function() {
+	parseRSS($scope.rssFeed, function(data) {
+		if(data == null)
+			return;
+
+		var mostRecentDate = null;
+		if($scope.articles.length &amp;&amp; $scope.rssFeed == $scope.originalRssFeed)
+			mostRecentDate = $scope.articles[0].date;
+
+		var entries = _.map(data.responseData.feed.entries, function(el) { return parseEntry(el); });
+
+		if(mostRecentDate != null) {
+			entries = _.filter(entries, function(el) { return el.date &lt; mostRecentDate; });
+		}
+
+		if($scope.rssFeed != $scope.originalRssFeed) {
+			$scope.articles = entries;
+			$scope.originalRssFeed = $scope.rssFeed;
+		}
+		else
+			$scope.articles = _.union($scope.articles, entries);
+
+		$scope.$apply(function() {
+			$scope.articles = _.sortBy($scope.articles, function(el) { return el.date; });
+		});
+	});
+};</pre>
+This code basically calls another function, parseRSS, that calls a Google API to parse an XML feed. You'll notice that the URL that is passed in through accessing that ng-model we declared above, rssFeed. Using the data, we'll do some manipulation to convert the RSS feed item into an item we care about, then basically just add it to an array of all of the feed items: $scope.articles. [The code is a little longer to determine if the rss feed has been changed since the last time updateModel was called - that's why there are mostRecentDate and originalRssFeed variables. There's also a _filter to remove redundant RSS items (_.union wasn't working due to a unique hash key Angular assigns its objects)]
+
+Finally, you might notice the last few lines:
+<pre>$scope.$apply(function() {
+	$scope.articles = _.sortBy($scope.articles, function(el) { return el.date; });
+});</pre>
+It would seem that just the $scope.articles assignment would be enough, but for some reason, this doesn't register with AngularJS on the very first load (it does populate on subsequent loads). If it is wrapped in $scope.$apply, then it seems to ensure AngularJS manually registers or listens to the event.
+
+Now, to keep updating, I'm going to basically just keep clicking that updateButton so updateModel() keeps getting called.
+<pre>$(function() {
+	var $update = $('#update');
+	$update.click();
+
+	//then call every 30 secs
+	var timeout = 30000;
+	setInterval(function() {
+		if(document.activeElement.nodeName != 'INPUT' &amp;&amp; document.activeElement.id != 'rssFeed')
+			$update.click();
+	}, timeout);
+});</pre>
+So it will look for new data every 30 seconds and will only fire if the $update text field isn't focused (so it won't fire if the user is in the middle of changing the RSS feed) - I couldn't get Jquery .is(":focus") working, so I used a different work around.
+<h2>Allow the user to set items to a "read" state</h2>
+Now that we have $scope.articles set up, let's write the HTML to display it.
+<pre>&lt;div ng-show='existingArticles()' class='container-fluid margin-bottom'&gt;
+	&lt;div class='span12 margin-bottom'&gt;
+		&lt;button class="btn" ng-click="markAll()"&gt;Mark all as &lt;span ng-show='allAreRead()'&gt;un&lt;/span&gt;read&lt;/button&gt;
+		&lt;button class="btn" ng-click="clearCompleted()"&gt;Clear Read&lt;/button&gt;
+		&lt;button class="btn" ng-click="showOrHideAll()"&gt;&lt;span&gt;Toggle Headlines/Content&lt;/span&gt;&lt;/button&gt;
+		&lt;button class="btn" id='toggleTheme'&gt;&lt;span&gt;Toggle Dark/Light Theme&lt;/span&gt;&lt;/button&gt;
+	&lt;/div&gt;
+
+	&lt;div ng-hide='article.cleared' class='span12 read-{{article.read}}' ng-repeat="article in articles"&gt;
+		&lt;span ng-click='toggleShow(article)' class='title'&gt;{{article.title}}&lt;/span&gt;
+		&lt;span&gt;&lt;a href='{{article.link}}' target='_blank'&gt;{{article.shortLink}}&lt;/a&gt;&lt;/span&gt;
+		&lt;span ng-click="markAsRead(article)" class='markRead'&gt;(Mark as &lt;span ng-show='article.read'&gt;un&lt;/span&gt;read)&lt;/span&gt;
+		&lt;div ng-show='article.show' class='content'&gt;{{article.content}}&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div ng-hide='existingArticles()' class='container-fluid'&gt;
+	&lt;div ngclass='span12'&gt;
+		You may have read all of the articles... :/ I'll try to load some more...
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+If there are existingArticles (that's a function defined in scope that checks that there exist some non-cleared articles), then the first div.container-fluid with the buttons and articles is shown. If not, then the second div.container-fluid is shown indicating there are no articles currently.
+
+When there are articles, then each article is looped via the ng-repeat, each in its own div.span12. It'll show the title, link, shortlink, and content, and a button to mark the item as "read."
+
+One note is that content is shown when the title is clicked - via the ng-click='toggleShow(article)' - this shows that you can pass in the article item as a parameter:
+<pre>$scope.toggleShow = function(article) {
+	article.show = !article.show;
+};</pre>
+<h2>Have a mark and clear read items button</h2>
+To mark and clear read items, we just set up buttons and set their ng-click handlers. $scope has a markAll() to mark all read/unread and a clearCompleted(). markAll() makes use of an allAreRead() function which uses Underscore to determine if all of the articles have been marked read. You can see them in the finished Gist, but it's mostly straightforward. markAll() just needs to mark all items as either read=true or read=false. clearCompleted() just needs to set the cleared attribute to true for the read items, and ng-hide will do the rest.
+<h2>Be able to toggle a light and dark theme</h2>
+To do this, there's a #toggleTheme button. Instead of using AngularJS, I'll just use JQuery to toggle a CSS class on the body tag:
+<pre>$(function() {
+	var $body = $('body');
+	$('#toggleTheme').click(function() {
+		$body.toggleClass('dark');
+	});
+});</pre>
+You can view the finished Gist here: <a href="http://gist.github.com/4441416">http://gist.github.com/4441416</a> and some working code here: <a href="http://dchang.me/feed-reader/v1">http://dchang.me/feed-reader/v1</a>
