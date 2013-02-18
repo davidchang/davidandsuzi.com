@@ -467,7 +467,7 @@ blockquote.pull-left{
 
 @media only screen and (min-width: 940px) {
 	body{
-		padding-top: 60px; /* maybe 45? */
+		padding-top: 40px; /* maybe 45? */
 	}
 	
 	.container-fluid{

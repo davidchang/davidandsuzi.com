@@ -23,20 +23,21 @@
 				font-weight: bold;
 			}
 			header .page-header, #pageClear, section.post_content {
-				margin: -3px 0px 18px;
-				border-bottom: 1px solid #EEE;
+				margin: -3px 0px 10px;
+				border-bottom: 0px solid #EEE;
 			}
 			#pageClear {
 				padding-bottom: 18px;
 			}
 			.theTime {
-				margin: 5px 0px -5px;
+				margin: -5px 0px;
+                font-style: italic;
 			}
 			.carousel-control.left, .carousel-control.right {
 				cursor: pointer;
-			}
+			} 
 			.writtenBy {
-				font-weight: bold;
+                color: #0088CC;
 			}
 			article.post h1 a {
 				color: #333;
@@ -50,11 +51,10 @@
 			}
 			.clear {
 				clear: both;
-			}
+            }
 		</style>
-		<link href="styles/spacelab.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="styles/style.css" rel="stylesheet">
+		<link href="../styles/style.css" rel="stylesheet">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -68,28 +68,13 @@
 						<div class="container-fluid nav-container">
 							<nav role="navigation">
 								<a class="brand" id="logo" title="In This is Love" href="http://davidandsuzi.com">davidandsuzi</a>
-								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-								</a>
-								<div class="nav-collapse">
-									<ul id="menu-blog" class="nav">
-										<li id="menu-item-116" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="David's Blog Posts" href="http://davidandsuzi.com/category/david/">David</a>
-										</li>
-										<li id="menu-item-118" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="Suzi's Blog Posts" href="http://davidandsuzi.com/category/suzi/">Suzi</a>
-										</li>
-									</ul>
-								</div>
 							</nav>						
 						</div>
 					</div>
 				</div>
 			</div>
 		</header>
-		<div class="container-fluid">
+		<div id='parentContainer' class="container-fluid">
 			<div id="content" class="clearfix row-fluid">
 				<div id="main" class="span6 clearfix" role="main">
 					<article class='clearfix' role="article">
@@ -117,9 +102,6 @@ I find this strangely consistent with my view on human nature - though I find it
 
 As for me - I'm all for the revelation of human insufficiency and selfishness. Watching the Dark Knight helped me, at least a little bit, to recognize my own inability and need to be saved from myself - if I'm not saved from myself, I could easily turn into a Harvey Two Face, driven by anger and resentment and failing to realize that I've become the person that I hate, the hero who lived long enough to see himself become the villain. I agree with our need to be humbled and freed, but the distinction in my opinion is that we are not freed into chaos were everyone is just as messed up as anyone else. I think we can be saved to something greater - there is redemption to be found in Christ (or, to stick with the movie parallel, Batman - who is the superhero we don't deserve and yet need, and yet still condemn and despise).
 
-						</section>
-						<section>
-							Previous Post: <a href="<!-- php echo get_permalink( ); -->">Title here <!--php the_title(); --></a>
 						</section>
 					</article> <!-- end article -->
 				</div>

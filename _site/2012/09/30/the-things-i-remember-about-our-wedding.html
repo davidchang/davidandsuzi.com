@@ -23,20 +23,21 @@
 				font-weight: bold;
 			}
 			header .page-header, #pageClear, section.post_content {
-				margin: -3px 0px 18px;
-				border-bottom: 1px solid #EEE;
+				margin: -3px 0px 10px;
+				border-bottom: 0px solid #EEE;
 			}
 			#pageClear {
 				padding-bottom: 18px;
 			}
 			.theTime {
-				margin: 5px 0px -5px;
+				margin: -5px 0px;
+                font-style: italic;
 			}
 			.carousel-control.left, .carousel-control.right {
 				cursor: pointer;
-			}
+			} 
 			.writtenBy {
-				font-weight: bold;
+                color: #0088CC;
 			}
 			article.post h1 a {
 				color: #333;
@@ -50,11 +51,10 @@
 			}
 			.clear {
 				clear: both;
-			}
+            }
 		</style>
-		<link href="styles/spacelab.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="styles/style.css" rel="stylesheet">
+		<link href="../styles/style.css" rel="stylesheet">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -68,28 +68,13 @@
 						<div class="container-fluid nav-container">
 							<nav role="navigation">
 								<a class="brand" id="logo" title="In This is Love" href="http://davidandsuzi.com">davidandsuzi</a>
-								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-								</a>
-								<div class="nav-collapse">
-									<ul id="menu-blog" class="nav">
-										<li id="menu-item-116" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="David's Blog Posts" href="http://davidandsuzi.com/category/david/">David</a>
-										</li>
-										<li id="menu-item-118" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="Suzi's Blog Posts" href="http://davidandsuzi.com/category/suzi/">Suzi</a>
-										</li>
-									</ul>
-								</div>
 							</nav>						
 						</div>
 					</div>
 				</div>
 			</div>
 		</header>
-		<div class="container-fluid">
+		<div id='parentContainer' class="container-fluid">
 			<div id="content" class="clearfix row-fluid">
 				<div id="main" class="span6 clearfix" role="main">
 					<article class='clearfix' role="article">
@@ -137,9 +122,6 @@
 	<li>The day we left for Seattle was pretty stressful, and I accidentally thought our flight was an hour earlier than it really was. We got stopped at security for Suzi's unopened Hello Kitty ice cream maker. We went from TUL to DEN and ate at a place called "It's a Wrap! It's a bowl!" Then we were in Seattle, getting picked up by my pastor and his wife, Matt and Lauren. We grabbed some Chipotle and went back to eat at their place, where Jimmy and Lois and Tiffany were. Then we got a ride to Chris's house, where we drove his car back home to Redmond (also, getting lost in the process :/).</li>
 </ul>
 
-						</section>
-						<section>
-							Previous Post: <a href="<!-- php echo get_permalink( ); -->">Title here <!--php the_title(); --></a>
 						</section>
 					</article> <!-- end article -->
 				</div>

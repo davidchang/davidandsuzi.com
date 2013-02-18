@@ -23,20 +23,21 @@
 				font-weight: bold;
 			}
 			header .page-header, #pageClear, section.post_content {
-				margin: -3px 0px 18px;
-				border-bottom: 1px solid #EEE;
+				margin: -3px 0px 10px;
+				border-bottom: 0px solid #EEE;
 			}
 			#pageClear {
 				padding-bottom: 18px;
 			}
 			.theTime {
-				margin: 5px 0px -5px;
+				margin: -5px 0px;
+                font-style: italic;
 			}
 			.carousel-control.left, .carousel-control.right {
 				cursor: pointer;
-			}
+			} 
 			.writtenBy {
-				font-weight: bold;
+                color: #0088CC;
 			}
 			article.post h1 a {
 				color: #333;
@@ -50,11 +51,10 @@
 			}
 			.clear {
 				clear: both;
-			}
+            }
 		</style>
-		<link href="styles/spacelab.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="styles/style.css" rel="stylesheet">
+		<link href="../styles/style.css" rel="stylesheet">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -68,28 +68,13 @@
 						<div class="container-fluid nav-container">
 							<nav role="navigation">
 								<a class="brand" id="logo" title="In This is Love" href="http://davidandsuzi.com">davidandsuzi</a>
-								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-								</a>
-								<div class="nav-collapse">
-									<ul id="menu-blog" class="nav">
-										<li id="menu-item-116" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="David's Blog Posts" href="http://davidandsuzi.com/category/david/">David</a>
-										</li>
-										<li id="menu-item-118" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="Suzi's Blog Posts" href="http://davidandsuzi.com/category/suzi/">Suzi</a>
-										</li>
-									</ul>
-								</div>
 							</nav>						
 						</div>
 					</div>
 				</div>
 			</div>
 		</header>
-		<div class="container-fluid">
+		<div id='parentContainer' class="container-fluid">
 			<div id="content" class="clearfix row-fluid">
 				<div id="main" class="span6 clearfix" role="main">
 					<article class='clearfix' role="article">
@@ -141,9 +126,6 @@ Once at the hotel, I got ready to sleep, but couldn't. I still had to write a le
 
 Friday night was hectic. I don't know how I made it. Although it was rough, one thing was exceptionally memorable. Throughout the day, people would pull me aside and tell me that David really loved me. They saw it from the way he cared for me and interacted with me. I'm glad that when I married him, I was confident in his love for me. I don't rest in the fact that David will love me perfectly. I'm glad our decision to marry was made with a clear mind. It hinged on the love of Christ- not "lovey dovey" emotion or superficial expectations to feel "completed." I'm glad to say that I woke up the next morning in complete confidence in my decision to marry David and commit to him for the rest of my life.
 
-						</section>
-						<section>
-							Previous Post: <a href="<!-- php echo get_permalink( ); -->">Title here <!--php the_title(); --></a>
 						</section>
 					</article> <!-- end article -->
 				</div>

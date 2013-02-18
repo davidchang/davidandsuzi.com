@@ -23,20 +23,21 @@
 				font-weight: bold;
 			}
 			header .page-header, #pageClear, section.post_content {
-				margin: -3px 0px 18px;
-				border-bottom: 1px solid #EEE;
+				margin: -3px 0px 10px;
+				border-bottom: 0px solid #EEE;
 			}
 			#pageClear {
 				padding-bottom: 18px;
 			}
 			.theTime {
-				margin: 5px 0px -5px;
+				margin: -5px 0px;
+                font-style: italic;
 			}
 			.carousel-control.left, .carousel-control.right {
 				cursor: pointer;
-			}
+			} 
 			.writtenBy {
-				font-weight: bold;
+                color: #0088CC;
 			}
 			article.post h1 a {
 				color: #333;
@@ -50,11 +51,10 @@
 			}
 			.clear {
 				clear: both;
-			}
+            }
 		</style>
-		<link href="styles/spacelab.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="styles/style.css" rel="stylesheet">
+		<link href="../styles/style.css" rel="stylesheet">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -68,28 +68,13 @@
 						<div class="container-fluid nav-container">
 							<nav role="navigation">
 								<a class="brand" id="logo" title="In This is Love" href="http://davidandsuzi.com">davidandsuzi</a>
-								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-								</a>
-								<div class="nav-collapse">
-									<ul id="menu-blog" class="nav">
-										<li id="menu-item-116" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="David's Blog Posts" href="http://davidandsuzi.com/category/david/">David</a>
-										</li>
-										<li id="menu-item-118" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="Suzi's Blog Posts" href="http://davidandsuzi.com/category/suzi/">Suzi</a>
-										</li>
-									</ul>
-								</div>
 							</nav>						
 						</div>
 					</div>
 				</div>
 			</div>
 		</header>
-		<div class="container-fluid">
+		<div id='parentContainer' class="container-fluid">
 			<div id="content" class="clearfix row-fluid">
 				<div id="main" class="span6 clearfix" role="main">
 					<article class='clearfix' role="article">
@@ -117,9 +102,6 @@ With that said - it's important to go to weddings. You realize that what you do 
 
 To the Christians in Corinth, Paul writes: "Do you not know that your bodies are temples of the Holy Spirit, who is in you, whom you have received from God? You are not your own; you were bought at a price. Therefore honor God with your bodies" (6:19-20).
 
-						</section>
-						<section>
-							Previous Post: <a href="<!-- php echo get_permalink( ); -->">Title here <!--php the_title(); --></a>
 						</section>
 					</article> <!-- end article -->
 				</div>

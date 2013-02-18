@@ -23,20 +23,21 @@
 				font-weight: bold;
 			}
 			header .page-header, #pageClear, section.post_content {
-				margin: -3px 0px 18px;
-				border-bottom: 1px solid #EEE;
+				margin: -3px 0px 10px;
+				border-bottom: 0px solid #EEE;
 			}
 			#pageClear {
 				padding-bottom: 18px;
 			}
 			.theTime {
-				margin: 5px 0px -5px;
+				margin: -5px 0px;
+                font-style: italic;
 			}
 			.carousel-control.left, .carousel-control.right {
 				cursor: pointer;
-			}
+			} 
 			.writtenBy {
-				font-weight: bold;
+                color: #0088CC;
 			}
 			article.post h1 a {
 				color: #333;
@@ -50,11 +51,10 @@
 			}
 			.clear {
 				clear: both;
-			}
+            }
 		</style>
-		<link href="styles/spacelab.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="styles/style.css" rel="stylesheet">
+		<link href="../styles/style.css" rel="stylesheet">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -68,28 +68,13 @@
 						<div class="container-fluid nav-container">
 							<nav role="navigation">
 								<a class="brand" id="logo" title="In This is Love" href="http://davidandsuzi.com">davidandsuzi</a>
-								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-								</a>
-								<div class="nav-collapse">
-									<ul id="menu-blog" class="nav">
-										<li id="menu-item-116" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="David's Blog Posts" href="http://davidandsuzi.com/category/david/">David</a>
-										</li>
-										<li id="menu-item-118" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-											<a title="Suzi's Blog Posts" href="http://davidandsuzi.com/category/suzi/">Suzi</a>
-										</li>
-									</ul>
-								</div>
 							</nav>						
 						</div>
 					</div>
 				</div>
 			</div>
 		</header>
-		<div class="container-fluid">
+		<div id='parentContainer' class="container-fluid">
 			<div id="content" class="clearfix row-fluid">
 				<div id="main" class="span6 clearfix" role="main">
 					<article class='clearfix' role="article">
@@ -111,9 +96,6 @@ It's weird to think that I may never see my friends ever again once I graduate a
 
 Although I may miss the things that are behind, I also can't help but be joyful for the things ahead. I can't wait to get married. I am so eager to wear my wedding band! Secretly, I take it out of the box, put it on, and admire how wonderful it looks with my engagement ring...but most importantly, how it will symbolize our commitment to each other in marriage. I'll admit (because I know David won't sacrifice his man card saying this) I can't wait for us to wake up next to each other every morning, I can't wait to cuddle on the couch and watch a movie on a rainy Seattle night, I can't wait to give him a big hug after he comes home from work, and I can't wait to go on dates! I haven't been on a date in so long! I can't wait to eat yummy food, see things I've never seen before, and have a picnic in perfect weather. Most of all, I can't wait for the night we don't have to say goodbye after a date! There is so much freedom in marriage :)
 
-						</section>
-						<section>
-							Previous Post: <a href="<!-- php echo get_permalink( ); -->">Title here <!--php the_title(); --></a>
 						</section>
 					</article> <!-- end article -->
 				</div>
