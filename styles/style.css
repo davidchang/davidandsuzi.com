@@ -545,3 +545,46 @@ blockquote.pull-left{
 		padding-right: 0;
 	}
 }
+			#footerVerse {
+				font-weight: bold;
+			}
+			header .page-header, #pageClear, section.post_content {
+				margin: -3px 0px 20px;
+				border-bottom: 0px solid #EEE;
+			}
+			#pageClear {
+				padding-bottom: 18px;
+			}
+			.theTime {
+				margin: -5px 0px;
+                font-style: italic;
+			}
+			.carousel-control.left, .carousel-control.right {
+				cursor: pointer;
+			} 
+			article.post h1 a {
+				color: #333;
+				line-height: 33px
+			}
+			#main article p, #main article section li {
+				color: #444;
+				font-size: 14px;
+				line-height: 22px;
+				margin: 12px 0px;
+			}
+#postsList {
+    list-style-type: none;
+    margin-left: 0px;
+    margin-bottom: 30px;
+}
+.liPost {
+    margin: 15px 0px;
+}
+.postTitle {
+    font-size: 20px;
+}
+.postDate {
+    font-size: 14px;
+    margin-left: 15px;
+    color: #333;
+}
