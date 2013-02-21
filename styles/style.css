@@ -549,16 +549,18 @@ blockquote.pull-left{
 				font-weight: bold;
 			}
 			header .page-header, #pageClear, section.post_content {
-				margin: -3px 0px 20px;
-				border-bottom: 0px solid #EEE;
+				margin: -3px 0px 15px;
+				border-bottom: 1px solid #EEE;
 			}
 			#pageClear {
 				padding-bottom: 18px;
 			}
 			.theTime {
-				margin: -5px 0px;
-                font-style: italic;
+				margin: -3px 0px 0px;
 			}
+            .writtenBy {
+                font-weight: bold;
+            }
 			.carousel-control.left, .carousel-control.right {
 				cursor: pointer;
 			} 
@@ -587,4 +589,12 @@ blockquote.pull-left{
     font-size: 14px;
     margin-left: 15px;
     color: #333;
+}
+#pageTitle {
+    font-size: 30px;
+    line-height: 1;
+}
+body {
+    line-height: 22px !important;
+    color: #444 !important;
 }
