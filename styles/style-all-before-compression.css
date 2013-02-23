@@ -1,0 +1,241 @@
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+}
+
+.clearfix:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.clearfix {
+    zoom:1;
+}
+/* for fun */
+* {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -ms-transition:     all 0.2s ease;
+  -o-transition:      all 0.2s ease;
+}
+
+/* layout */
+
+body{
+	padding-top: 0;
+}
+
+.nav-container{
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#inner-header{
+	width: 100%;
+}
+
+input, textarea, select, .uneditable-input {
+	margin-bottom: 0;
+}
+
+#s{
+	width: 100px;
+}
+
+#content{
+	padding: 10px 0 0;
+}
+
+/* post styling */
+#main p.meta{
+	font-style: italic;
+	color: #808080;
+}
+
+#main article{
+	margin-bottom: 18px;
+/*	border-bottom: 1px solid #eeeeee; */
+	padding: 0 0 9px;
+}
+p.tags{
+	line-height: 20px;
+}
+#main article img{
+	max-width: 100%;
+}
+.archive #main .post h3{
+	line-height: 24px;
+	margin-bottom: 10px;
+}
+.page-template-page-homepage-php #main article{
+	border-bottom: none;
+}
+/* specific post-type styles */
+
+/* image attachment */
+
+.attachment #main .post_content img{
+	max-width: 100%;
+}
+
+.ie8 #main .media-grid img{
+	max-height: none !important;
+	max-width: none !important;
+}
+
+.attachment-img{
+	margin-bottom: 18px;
+}
+
+.metadata p.alert-message{
+	margin-right: 0;
+	margin-bottom: 18px;
+}
+
+#gallery-nav{
+	list-style-type: none;
+	margin-left: 0;
+}
+
+li.next a, li.previous a{
+	position: relative;
+}
+
+li.next a:hover:before{
+	content: "\2190";
+	position: absolute;
+	display: block;
+	top: 42%;
+	left: 0;
+	background-color: #BFBFBF;
+	color: #444;
+	width: 20px;
+	height: 20px;
+	padding-left: 5px;
+	text-decoration: none;
+	box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+li.previous a:hover:before{
+	content: "\2192";
+	position: absolute;
+	display: block;
+	top: 42%;
+	right: 0;
+	background-color: #BFBFBF;
+	color: #444;
+	width: 20px;
+	height: 20px;
+	padding-left: 5px;
+	text-decoration: none;
+	box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+/* for some reason the bs version currently available for download doesn't have this style */
+.label{
+	text-transform: uppercase;
+}
+
+@media only screen and (min-width: 940px) {
+	body{
+		padding-top: 40px; /* maybe 45? */
+	}
+	
+	.container-fluid{
+		max-width: 970px;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+	
+	#inner-footer{
+		padding: 0;
+	}
+	
+	#content{
+		padding-left: 0;
+		padding-right: 0;
+	}
+	
+	.topbar-inner{
+		padding: 0;
+	}
+	
+	.topbar form.pull-right {
+		float: right;
+	}
+	
+	.navbar-form, .navbar-search {
+		margin-top: 6px;
+		margin-bottom: 0;
+	}
+	
+	.navbar-search{
+		padding-left: 0;
+	}
+	
+	.sidebar{
+		margin-top: 0 !important;
+	}
+	
+	.vcard:hover .edit-comment{
+		display: inline-block;
+	}
+	
+	#s{
+		width: 210px;
+	}
+	
+}
+			#footerVerse {
+				font-weight: bold;
+			}
+			header .page-header, #pageClear, section.post_content {
+				margin: -3px 0px 15px;
+				border-bottom: 1px solid #EEE;
+			}
+			#pageClear {
+				padding-bottom: 18px;
+			}
+			.theTime {
+				margin: -3px 0px 0px;
+			}
+            .writtenBy {
+                font-weight: bold;
+            }
+			.carousel-control.left, .carousel-control.right {
+				cursor: pointer;
+			} 
+			article.post h1 a {
+				color: #333;
+				line-height: 33px
+			}
+			#main article p, #main article section li {
+				color: #444;
+				font-size: 14px;
+				line-height: 22px;
+				margin: 12px 0px;
+			}
+#postsList {
+    list-style-type: none;
+    margin-left: 0px;
+    margin-bottom: 30px;
+}
+.liPost {
+    margin: 15px 0px;
+}
+.postTitle {
+    font-size: 20px;
+}
+.postDate {
+    font-size: 14px;
+    margin-left: 15px;
+    color: #333;
+}
+#pageTitle {
+    font-size: 30px;
+    line-height: 1;
+}
+body {
+    line-height: 22px !important;
+    color: #444 !important;
+}
