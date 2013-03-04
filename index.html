@@ -10,7 +10,7 @@ title: David and Suzi
             <a href="{{ post.url }}">{{ post.title }}</a>
         </div>
         <div class='postDate'>
-            {{ post.date | date: "%b %d, %Y" }}
+            By {{ post.category }} on {{ post.date | date: "%b %d, %Y" }}
         </div>
       </li>
     {% endfor %}
