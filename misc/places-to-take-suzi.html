@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Places to take Suzi</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+	<link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+    <style>
+		* {
+			font-family: 'Questrial', sans-serif;
+		}
+		iframe { 
+			vertical-align: top;
+		}
+		#canvas_holder{
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			width:100%; 
+			height:100%;
+			z-index: 0;
+		}
+		#map_canvas{
+			width:100%;
+			height:100%; 
+			position: "absolute"; 
+			top: 0px; 
+			left: 0px; 
+			overflow: "hidden";
+		}
+		#locationsDiv {
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			width: 300px;
+			z-index: 1;
+		}
+		#realDiv {
+			background-color: lightblue;
+			float: left;
+			padding: 20px;
+		}
+		.title {
+			font-weight: bold;
+			font-size: 1.3em;
+			margin-bottom: 10px;
+		}
+		#locationsDiv a {
+			color: black;
+		}
+		.address, .info {
+			padding-top: 10px;
+			margin-top: 10px;
+			border-top: 1px solid black;
+		}
+    </style>
+  </head>
+  <body>
+  
+	<div id='locationsDiv'>
+		<div id='realDiv'>
+			<div class='title'>Places to take Suzi</div>
+			<a id='nextLoc' href='#'>Click for Next Place to Take Suzi!</a>
+		</div>
+	</div>
+	
+	<!--Google Maps APIv3 Background-->
+	<div id="canvas_holder">
+		<div id="map_canvas"></div>
+	</div><!-- End Google Maps Background -->
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  	
+	<script>
+		var map;
+		var markersAndWindows = [];
+		var currentIndex = 0;
+		
+		var locations = [
+			{ loc: [47.669424, -122.128066], title: 'HOME!', content: '<div><div class="title">Chang Residence</div><div class="address">15827 NE Leary Way Ave.<br/>Redmond, WA 98052</div><div class="info">Our home where we can kick back and chill, watch Community, enjoy the nearby Farmer\'s Market, and have all sorts of fun adventures.</div></div>' },
+			{ loc: [47.6263985, -122.3476939], title: 'Sushiland', content: '<div><div class="title">Sushiland</div><div class="address">803 5th Avenue North<br/>Seattle, WA 98109</div><div class="info">For all of your sushi needs. And for the conveyor belts, of course! [Sushi does, in fact, taste amazing when served off of a conveyor belt]</div></div>' },
+			{ loc: [47.624567, -122.3472789], title: 'Genki\'s', content: '<div><div class="title">Genki\'s</div><div class="address">511 Mercer Street<br/>Seattle, WA 98109</div><div class="info">For all of your sushi needs. And for the conveyor belts, of course! [Sushi does, in fact, taste amazing when served off of a conveyor belt]</div></div>' },
+			{ loc: [47.6072211, -122.3378022], title: 'Seattle Art Museum', content: '<div><div class="title">Seattle Art Museum</div><div class="address">1300 First Avenue<br/>Seattle, WA 98101</div><div class="info">Seattle\'s Art Museum, free on first Thursdays! They may or may not have a room full of big things, but I know you would still enjoy it :) We can spend the night analyzing art and utilizing rhetoric, since we are super sophisticated.</div></div>' },
+			{ loc: [47.6720826, -122.1212963], title: 'Haiku Sushi Buffet', content: '<div><div class="title">Haiku Sushi Buffet</div><div class="address">7548 164th AVE NE<br/>Redmond, WA 98052</div><div class="info">All you can eat sushi? This is either the best day idea ever or something we will regret for the entire night.</div></div>' },
+			{ loc: [47.6152572, -122.3200382], title: 'Molly Moon\'s', content: '<div><div class="title">Molly Moon\'s</div><div class="address">917 E Pine St<br/>Seattle, WA 98122</div><div class="info">I\'ll be honest... this ice cream shop smells exactly like a cake. They should produce air fresheners. Craving salted caramel? Vegan coconut crunch? Something with bacon? Molly Moon\'s = solution.</div></div>' },
+			{ loc: [47.5982552, -122.31982], title: 'Chinese Southern Baptist Church', content: '<div><div class="title">Chinese Southern Baptist Church</div><div class="address">925 S King St<br/>Seattle, WA 98104</div><div class="info">Church! You can finally meet the community that has helped my transition to Seattle for the past 6 months be so smooth! We can enjoy some really good food and jam a worship set and glorify Him together.</div></div>' },
+			{ loc: [47.6204901, -122.3496484], title: 'Space Needle', content: '<div><div class="title">Space Needle</div><div class="address">400 Broad Street<br/>Seattle, WA 98109</div><div class="info">Space Needle. Enough said!</div></div>' },
+			{ loc: [47.6084443, -122.3404435], title: 'Pike Place', content: '<div><div class="title">Pike Place</div><div class="address">85 Pike Street<br/>Seattle, WA 98101</div><div class="info">Farmer\'s market. First Starbucks. A bubble gum alley. Right by the piers. Let\'s do it!</div></div>' },
+			{ loc: [47.608006, -122.339091], title: 'Japonessa', content: '<div><div class="title">Japonessa</div><div class="address">1400 1st Avenue</br>Seattle, WA 98101</div><div class="info">Traditional sushi. We should get calamari and enjoy super cheap rolls. High five!</div></div>' },
+			{ loc: [49.2116668, -123.1402206], title: 'Canada', content: '<div><div class="title">Canada</div><div class="address">Vancouver, BC</div><div class="info">Everyone does it. Giant sushi?</div></div>' },
+			{ loc: [42.941219,-122.13383], title: 'Crater Lake', content: '<div><div class="title">Crater Lake</div><div class="address">Crater Lake National Park<br/>Crater Lake, OR 97604</div><div class="info">Maybe we can finally go to Oregon too!</div></div>' },
+			{ loc: [47.621373,-122.336229], title: 'Amazon', content: '<div><div class="title">Amazon</div><div class="address">333 Boren Ave. N<br/>Seattle, WA 98109</div><div class="info">Work?</div></div>' },
+			{ loc: [47.6090975, -122.3338525], title: '5th Ave. Theater', content: '<div><div class="title">5th Ave. Theater</div><div class="address">1308 5th Avenue<br/>Seattle, WA 98101</div><div class="info">Let\'s watch a musical.</div></div>' }
+			
+		];
+		//randomize
+		locations.sort(function() {return 0.5 - Math.random()});
+	
+		function showInfoWindow(index, hideAll) {
+			if(hideAll) {
+				for(var i = 0; i < markersAndWindows.length; ++i) {
+					markersAndWindows[i].infoWindow.close(map, markersAndWindows[i].marker);
+				}
+			}
+
+			markersAndWindows[index].infoWindow.open(map, markersAndWindows[index].marker);
+		}
+		
+		function moveToLocation(index) {
+			index = index % locations.length;
+			map.panTo(new google.maps.LatLng(locations[index].loc[0], locations[index].loc[1]));
+			showInfoWindow(index, true);
+		}
+		
+		function getIndex(lat, lng) {
+			var factor = 1000;
+			var lat = parseInt(lat * factor);
+			var lng = parseInt(lng * factor);
+			
+			for(var i = 0; i < locations.length; ++i) {
+				var lat1 = parseInt(locations[i].loc[0] * factor);
+				var lng1 = parseInt(locations[i].loc[1] * factor);
+				
+				if(lat1 == lat && lng1 == lng)
+					return i;
+			}
+			return -1;
+		}
+		
+		function initialize() {
+	    	var myOptions = {
+				panControl: false,
+				zoomControl: false,
+				mapTypeControl: false,
+				scaleControl: false,
+				streetViewControl: false,
+				overviewMapControl: false,
+				draggable: true,
+				disableDoubleClickZoom: false,
+				scrollwheel: true,
+	      		zoom: 15,
+	      		center: new google.maps.LatLng(locations[0].loc[0], locations[0].loc[1]),
+	      		mapTypeId: google.maps.MapTypeId.TERRAIN
+			};
+			
+			map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+			
+			for(var j = 0; j < locations.length; ++j) {
+				var i = locations[j];
+				var marker = new google.maps.Marker({
+					position: new google.maps.LatLng(i.loc[0], i.loc[1]),
+					title: i.title,
+					map: map
+				});
+				
+				var infoWindow = new google.maps.InfoWindow({
+					content: i.content,
+					maxWidth: 450
+				});
+				
+				//infoWindow.open(map,marker);
+				markersAndWindows.push({marker: marker, infoWindow: infoWindow});
+			}
+			
+			showInfoWindow(0);
+	
+		}//end initialize
+		
+		initialize();
+		
+		$(function() {
+			for(var i = 0; i < markersAndWindows.length; ++i) {
+				var cur = markersAndWindows[i];
+				google.maps.event.addListener(cur.marker, 'click', function(e) {
+					var ind = getIndex(e.latLng.$a, e.latLng.ab);
+					if(ind > -1) {
+						//instead of showing info window, just move to the next location
+						//showInfoWindow(ind, false);
+						moveToLocation(ind);
+						if(ind == (currentIndex + 1))
+							++currentIndex;
+					}
+				});
+			}
+		
+			$('#nextLoc').click(function() {
+				moveToLocation(++currentIndex);
+			});
+		});
+	</script>
+
+</body>
+</html>
