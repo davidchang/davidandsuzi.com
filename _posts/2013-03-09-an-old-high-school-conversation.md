@@ -30,4 +30,4 @@ He didn't receive a fair trial. He was beaten and flogged and spit on. Crucifixi
 
 But at the end of it, Jesus asks, "why have You forsaken Me?" It wasn't the brutality of the abuse or the abandoning of His followers or any number of things that grieved Jesus - it was that He was forsaken by God. He paid the price for man's sins and disobedience. He was judged as if He had done all of the wrong things we've done. He received what we deserved. And why? So that we could receive what He deserved.
 
-The great irony of my friend's claim is that the second doesn't contradict the first - Jesus being forsaken doesn't contradict Moses saying God wouldn't forsake the Israelites. The second actually reinforces the first. Jesus being forsaken was absolutely necessary for God not to forsake the Israelites.
+The great irony of my friend's claim is that the second doesn't contradict the first - Jesus being forsaken doesn't contradict Moses saying God wouldn't forsake His people. The second actually reinforces the first. Jesus being forsaken was the only way for God not to forsake His people.
