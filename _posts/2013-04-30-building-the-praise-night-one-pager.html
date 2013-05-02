@@ -5,19 +5,34 @@ tags:
 - david
 meta: 
   _edit_last: "1"
-status: draft
+status: publish
 layout: post
 type: post
-published: false
+published: true
 category: David
 ---
+<style>
+#praiseNightUl {
+    margin: 0px;
+}
+#praiseNightUl li {
+    list-style-type: none;
+}
+#praiseNightUl li p:first-child {
+    font-weight: bold;
+}
+</style>
 <p>
 What I learned building the praise night site (currently hosted at <a href='http://krucial206.org/praiseNight'>http://krucial206.org/praiseNight</a> or <a href='http://dchang.me/praiseNight'>http://dchang.me/praiseNight</a>):
 </p>
 
+<p>
+<a href='http://krucial206.org/praiseNight'><img src="../imgs/praiseNight.png"/></a>
+</p>
+
 <p>I was trying to build something lightweight, and yet responsive, so I wanted to try to refrain from using Bootstrap. Here are some of my findings:</p>
 
-<ul>
+<ul id='praiseNightUl'>
 <li>
 <p>TTF font files don't work everywhere.</p>
 
@@ -136,15 +151,23 @@ What I learned building the praise night site (currently hosted at <a href='http
 </li>
 
 <li>
-<p>Minified my CSS and just put it inline</p>
+<p>Minified my CSS and just put it inline.</p>
 
 <p>Reference: <a href='http://cssminifier.com/'>http://cssminifier.com/</a></p>
 
 <p>And putting it inline meant the elimination of a network request. The file was pretty small though, so I don't think it would really impact the size of the HTML file.</p></li>
 
-<li><p>Used a CSS reset</p>
+<li><p>Used a CSS reset.</p>
 
 <p>There are a few out there (normalize.css, reset.css) - they pretty much "normalize" your CSS rules so that everything should theoretically look the same on any given browser.</p>
 
 <p>Reference: <a href='https://github.com/necolas/normalize.css'>https://github.com/necolas/normalize.css</a></p>
 </li>
+
+<li><p>Everyone's digging subtle pattern backgrounds.</p>
+
+<p>Reference: <a href='http://subtlepatterns.com'>http://subtlepatterns.com</a></p>
+
+</li>
+
+</ul>
