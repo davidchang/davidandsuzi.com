@@ -1,0 +1,23 @@
+{
+  "name": "cal-heatmap",
+  "version": "2.1.6",
+  "main": [
+    "./cal-heatmap.js",
+    "./cal-heatmap.css"
+  ],
+  "dependencies": {
+    "d3": "~v3.0.6"
+  },
+  "ignore": [
+    "test/"
+  ],
+  "gitHead": "d6c1cc5af1280ca9e708dd298a574275c2b386cf",
+  "readme": "# Cal HeatMap [![Build Status](https://travis-ci.org/kamisama/cal-heatmap.png?branch=master)](https://travis-ci.org/kamisama/cal-heatmap)\n\n> Cal-Heatmap is a module to create calendar heat map to visualise time data series a la github contribution graph, with d3.js\n\nThis module will help you to create a calendar graph, like the *[contribution calendar](https://github.com/blog/1360-introducing-contributions)* on each github user's page.\n\n![image](http://kamisama.github.com/cal-heatmap/img/screenshot.png)\n\nSee [documentation](http://kamisama.github.com/cal-heatmap/) to see some examples, and how to use.",
+  "readmeFilename": "README.md",
+  "_id": "cal-heatmap@2.1.6",
+  "description": "> Cal-Heatmap is a module to create calendar heat map to visualise time data series a la github contribution graph, with d3.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kamisama/cal-heatmap.git"
+  }
+}
