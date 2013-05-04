@@ -1,0 +1,36 @@
+<section ng-show="!currentlyDown">
+    <h1>You are up! High five!</h1>
+    <h2>Are you down?</h2>
+    <textarea ng-model="text" placeholder="Optional explanation"></textarea>
+    <div>
+        <button ng-click="moodDown()">I am Down</button>
+    </div>
+</section>
+<section ng-show="currentlyDown">
+    <h1>You are down :/ I hope things get worked out</h1>
+    <h2>Are you up?</h2>
+    <textarea ng-model="text" placeholder="Optional explanation"></textarea>
+    <div>
+        <button ng-click="moodUp()">I am Up</button>
+    </div>
+</section>
+
+<section class="middleSection">
+    <h2>Uptime</h2>
+    <div>You're up <span class="bold">{{uptime}}%</span> of the time</div>
+</section>
+
+<section id="logs">
+    <h2>Logs</h2>
+    <div class="time" ng-repeat="time in times | reverseByTime">
+        <div ng:class="isUp(time.up)">
+            <span ng-show="time.up">Up</span>
+            <span ng-show="!time.up">Down</span>
+            at {{time.time | date:'medium'}}
+        </div>
+        <div>
+            {{time.text}}
+        </div>
+    </div>
+    <div class="time">Started at {{startTime | date:'medium'}}</div>
+</section>
