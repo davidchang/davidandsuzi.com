@@ -1,0 +1,116 @@
+--- 
+title: Building an Is It Down for People
+description: 
+tags: 
+- Code
+- david
+meta: 
+  _edit_last: "1"
+status: publish
+layout: post
+type: post
+published: true
+category: David
+---
+<style>
+.img {
+    border: 2px solid gray;
+    padding: 10px;
+    opacity: 0.7;
+}
+.img:hover {
+    opacity: 1.0;
+}
+</style>
+<p>
+<a href='http://davidandsuzi.com/misc/am-i-down'><img class='img' src="../imgs/amIDown.png"/></a>
+</p>
+<p>
+<div>Site: <a href='http://davidandsuzi.com/misc/am-i-down'>http://davidandsuzi.com/misc/am-i-down</a></div>
+<div>Code: <a href='https://github.com/davidchang/am-i-down-one-page-app'>https://github.com/davidchang/am-i-down-one-page-app</a></div>
+</p>
+<p>
+I started thinking about a site like Is It Down a few months into marriage. Suzi and I were still adjusting to each other and our expectations and so we got into a fight about every two weeks. After one fight, we were trying to figure out how we could get better at conflict resolution, and I said that one of the key components for me was just admitting whenever I was starting to get frustrated. I thought about some kind of physical signal I could set off that would indicate some frustration on my part.
+</p>
+<p>
+Eventually, I started thinking about implementing an Am I Down, like a clever analog to an "Is It Down?" site, which indicates whenever a website or service goes down. I basically stole the idea from Heroku and their <a href="https://status.heroku.com">https://status.heroku.com</a> site. It seemed like a pretty quick project, but pretty useful, at least in logging my fights and seeing if I could find a trend in the data (in the frequency or timing of the fights, in the topic we were fighting over).
+</p>
+<p>I very specifically wanted to use Yeoman and Angular. This meant no backend, since Yeoman is only front end oriented, at least for the time being. Yeoman utilizes Grunt (a build system) and Bower (a front end package manager) and then has generators for popular JS frameworks (Backbone, Angular, Ember).</p>
+
+<p>To install yeoman (yo) and its Angular generator, then create a boilerplate web app modeled after the Angular Seed, I ran these commands (<a href='http://yeoman.io/gettingstarted.html'>http://yeoman.io/gettingstarted.html</a>): </p>
+<pre>
+npm install -g yo
+npm install -g generator-angular
+yo angular --minsafe
+</pre>
+
+<p>Now we've got a super basic web app. We could do:</p>
+
+<pre>grunt server</pre>
+
+<p>And a web page should open that shows your web app running. It also listens to your local files and refreshes automatically, which is pretty sweet.</p>
+
+<p>I'll use Git for source control (Yeoman creates a .gitignore, so you don't have to worry about saving a bunch of assets you might not want to be saving):</p>
+
+<pre>
+git init
+git add .
+git commit -m "initial webapp"
+</pre>
+
+<p>Now since there's no back end, the only way I can really get away with storage is through localStorage. To do this the right way, I'll need to get a front end component from Bower.</p>
+
+<pre>bower search angular | grep local</pre>
+
+<p>This turns up a few AngularJS local storage modules. I chose to download the one called angular-localstorage</p>
+
+<pre>bower install angular-local-storage</pre>
+
+<p>Now, I can check my directory app/components and can note an angular-local-storage folder has been added, with the proper files. I'll need to import the right JavaScript file in my app/index.html</p>
+
+<pre>
+&lt;script src="components/angular-local-storage/angular-local-storage.js"&gt;&lt;/script&gt;
+</pre>
+
+And a somewhat tricky point is that, to use the module, I need to inject it into my app. The Angular app is kicked off from app/scripts/app.js, and all I actually need to do is add the module in the list of dependencies:
+
+<pre>
+angular.module('amIDownOnePageApp', ['LocalStorageModule'])
+</pre>
+
+And now I can use it in my controller (in app/scripts/controllers/main.js):
+
+<pre>
+angular.module('amIDownOnePageApp')
+  .controller('MainCtrl', ['$scope', 'localStorageService', function ($scope, ls) {
+      ...
+  }
+</pre>
+
+<p>(If you note that the earlier command in creating the web app was yo angular --minsafe, you'll find that the minsafe means it is safe to minify all of the JavaScript. This is related to the way that Angular does dependency injection - it basically relies on the name of the argument to determine which service provider it needs to use. If minification is used, then the name of the variable may be shortened and lost. So the first element in that array, '$scope', refers to the first argument of</p>
+
+<pre>function($scope, ls)</pre>
+
+<p>And the ls is populated by that second element, 'localStorageService'.)</p>
+
+<p>Then I implemented most of the logic in Angular, which is actually pretty fun and which you would enjoy. You can see all of the code finished at the Github repo <a href='https://github.com/davidchang/am-i-down-one-page-app'>https://github.com/davidchang/am-i-down-one-page-app</a></p>
+
+<p>One of the things I was going to show was a log of all of the dates in which the status changed. I want to show them in the order of most recent to least recent. I can use one of Yeoman's Angular generators to generate a filter, which would be the proper way to order the data. I'll create a new git branch to isolate the feature change.</p>
+
+<pre>
+git checkout -b withReverseFilter
+yo angular:filter reverseByTime
+</pre>
+
+<p>Using the above command creates a filter called reverseByTime and correctly imports it in your app/index.html and in your Angular app. (It creates app/scripts/filters/reverse-by-time.js.) The only thing left is a small impelementation of the filter and it's ready for use in app/views/main.html. Afterwards, we'll commit the changes on our git branch, merge them back into master, and delete the withReverseFilter branch:</p>
+
+<pre>
+git commit -a -m "reverse filter implemented"
+git checkout master
+git merge withReverseFilter
+git branch -D withReverseFilter
+</pre>
+
+<p>And that's really all there was to it. We use Grunt to wrap everything up nicely, with JS and CSS minification and compression. It'll populate a clean app in the dist/ directory:</p>
+<pre>grunt --force</pre>
+<p>High five! Check it out at <a href='http://davidandsuzi.com/misc/am-i-down'>http://davidandsuzi.com/misc/am-i-down</a></p>
