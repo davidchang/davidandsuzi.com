@@ -1,5 +1,6 @@
 --- 
 title: Building Moodmeme at Angelhack Seattle
+description: What I learned building Moodmeme at Angelhack Seattle
 tags: 
 - david
 meta: 
@@ -26,6 +27,13 @@ Our team consisted of the following:
 - Gary, who goes to church with Chris and works at F5. Gary started from scratch and was solely responsible for developing the working, notification-driven Android app
 - Sean, who we picked up at the competition, who was a UX designer. He designed the mocks and functionality and worked on our front end
 - I worked on the general web functionality - getting an Angular app running on the front end with Facebook/Twitter authentication and implementing the back end to save data to Mongo
+- 
+Our idea was to build a site called [MoodMeme](http://moodmeme.com:3000) that does the following:
+
+- Allows you to manage your mood by setting metrics through HTML5 sliders
+- Shows you pictures of dogs to cheer you up
+- Has some data visualization of your mood over time
+- Allows you to invite your friends to be notified if your mood hits a certain threshold
 
 The competition was 24 hours long. We spent about the first 17 hours coding, got some sleep, went to church, then made our pitches. There were around 36 teams, so we were split into 3 groups of 12. Each group of 12 pitched to 2 judges and the top 2 of each group would move on to the finals to pitch before all 6 judges and everyone else. We made the finals and were second to pitch. I really thought we might win, until the last group presented (which ultimately got second). We were the youngest presenters at that point and had shown the most technically complete demo, so I thought they might give it to us. In the end though, we didn't place. I don't think we could have done anything too much better in our development or that Chris could have done anything more in his pitches - I think it just came down to our business idea/model/liability.
 
