@@ -27,7 +27,7 @@ Our team consisted of the following:
 - Gary, who goes to church with Chris and works at F5. Gary started from scratch and was solely responsible for developing the working, notification-driven Android app
 - Sean, who we picked up at the competition, who was a UX designer. He designed the mocks and functionality and worked on our front end
 - I worked on the general web functionality - getting an Angular app running on the front end with Facebook/Twitter authentication and implementing the back end to save data to Mongo
-- 
+
 Our idea was to build a site called [MoodMeme](http://moodmeme.com:3000) that does the following:
 
 - Allows you to manage your mood by setting metrics through HTML5 sliders
