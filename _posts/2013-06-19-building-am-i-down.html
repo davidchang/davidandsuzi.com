@@ -1,0 +1,258 @@
+--- 
+title: Building Am I Down
+description: 
+tags: 
+- Code
+- david
+meta: 
+  _edit_last: "1"
+status: publish
+layout: post
+type: post
+published: true
+category: David
+---
+<style>
+.img {
+    border: 2px solid gray;
+    padding: 10px;
+    opacity: 0.7;
+}
+.img:hover {
+    opacity: 1.0;
+}
+</style>
+<p>
+<a href='http://am-i-down.davidandsuzi.com'><img class='img' src="../imgs/amIDown.png"/></a>
+</p>
+<p>
+<div>Site: <a href='http://am-i-down.davidandsuzi.com/'>http://am-i-down.davidandsuzi.com</a></div>
+<div>Code: <a href='https://github.com/davidchang/am-i-down'>https://github.com/davidchang/am-i-down</a></div>
+</p>
+
+<p>
+Using Yeoman and using grunt (as a build system and to run a server with livereload) was a refreshing developer experience when I first started. But Yeoman is limited to the client side, and so getting the full stack to work was not immediately clear to me. Here's my best attempt, but suggestions to the workflow are more than welcome.
+</p>
+
+<h2>Creating a Yeoman App Inside Express</h2>
+
+<pre>
+express #so I created a new express app
+cd public
+yo angular --minsafe #and here's a Yeoman app in the public dir
+</pre>
+
+<p>
+So now, from my root directory, I have my main app.js file that runs the Node server and is initially set up with some routes pointing to some boilerplate views. And then I have the public/app directory in which my Yeoman development code lies, and if I run grunt build, then public/dist will be where my Yeoman production code lies.
+</p>
+
+<p>
+Since Yeoman spits out a single page AngularJS app, all we really need is for the index.html to be served to the user. So I removed all of the routing and views that Express gave me, and set up app.js to point to public/app/index.html in development and then public/dist/index.html file in production (to take advantage of Grunt's build system):
+</p>
+
+<pre>
+app.configure('development', function(){
+  app.use(express.errorHandler());
+  app.use(express.static(path.join(__dirname, 'public/app')));
+});
+
+app.configure('production', function(){
+  app.use(express.errorHandler());
+  app.use(express.static(path.join(__dirname, 'public/dist')));
+});
+</pre>
+
+<p>
+I later added back routing to support authentication and some RESTful type calls.
+</p>
+
+<h2>
+Running Express Server and Grunt Server Together
+</h2>
+
+<p>
+I really enjoy doing grunt server, but when your Yeoman app requires an underlying server, grunt server can't do everything.
+</p>
+
+<p>
+I could do node app.js to run the server (which runs on port 3000 by default) and then do cd public; grunt server (which somehow detects that it should also run on port 3000 and not the Yeoman-configured default 9000). This seems to work a little bit, but is for some reason kinda unreliable - server calls seem to fail over time and I'm not sure why.
+</p>
+
+<p>
+I modified the Gruntfile.js that Yeoman generates and, instead of running grunt server, I now run a new target called css-server to compile and minify Compass CSS and get a pseudo-livereload feel (I'm not using CoffeeScript, so I'm not worrying about that):
+</p>
+
+<pre>
+grunt.registerTask('server', [
+  'clean:server',
+  'coffee:dist',
+  'compass:server',
+  'livereload-start',
+  'connect:livereload',
+  'open',
+  'watch'
+]);
+
+grunt.registerTask('css-server', [
+  'clean:server',
+  'compass:server',
+  'cssmin:expressapp',
+  'livereload-start',
+  'watch'
+]);
+</pre>
+
+<p>
+There were a few other mods to make this work - I had to create the cssmin:express app target (because I didn't want to run grunt build every time):
+</p>
+
+<pre>
+cssmin: {
+  dist: {
+    files: {
+      '<%= yeoman.dist %>/styles/main.css': [
+        '.tmp/styles/{,*/}*.css'
+      ]
+    }
+  },
+  expressapp: {
+    files: {
+      '<%= yeoman.app %>/styles/main.css': [
+        '.tmp/styles/{,*/}*.css'
+      ]
+    }
+  }
+}
+</pre>
+
+<p>
+and I had to change the watch:Compass task to trigger that cssmin:express app target whenever a Compass file was changed:
+</p>
+
+<pre>
+compass: {
+  files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+  tasks: ['compass', 'cssmin:expressapp']
+}
+</pre>
+
+<p>
+You can view source at: <a href='https://github.com/davidchang/am-i-down/blob/master/public/Gruntfile.js'>https://github.com/davidchang/am-i-down/blob/master/public/Gruntfile.js</a>
+</p>
+
+<h2>
+Authentication in Angular
+</h2>
+
+<p>
+Note: there are better articles out there for this - I pretty much just followed <a href='http://www.frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/'>http://www.frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/</a> and <a href='http://blog.brunoscopelliti.com/deal-with-users-authentication-in-an-angularjs-web-app'>http://blog.brunoscopelliti.com/deal-with-users-authentication-in-an-angularjs-web-app</a>
+</p>
+
+<p>
+I decided to use Passport and Facebook as the only means to log in. So I set up the app as I normally would (see routes: <a href='https://github.com/davidchang/am-i-down/blob/master/routes.js'>https://github.com/davidchang/am-i-down/blob/master/routes.js</a> and the Passport config: <a href='https://github.com/davidchang/am-i-down/blob/master/passport-config.js'>https://github.com/davidchang/am-i-down/blob/master/passport-config.js</a>), using MongoDb with Mongoose as the back end.
+</p>
+
+<p>
+Then, perhaps not the best, I wrote an Angular service (yo angular:service Auth) to make a GET request to /user, which returns a JSON object of the user (if a user is logged in) or a basically empty JSON object (if the user is not logged in). Every time a new Angular controller is run (i.e. any time ng-view does some kind of routing), Auth.isLoggedIn() gets run and redirects if necessary - if the user is not logged in, they should always end up back on the index page, and if they are logged in, they should be redirected to the main user page.
+</p>
+
+<p>
+This logic could have arguably been contained in the $routeProvider config, which can run every time a route changes.
+</p>
+
+<p>
+Here's the service: <a href='https://github.com/davidchang/am-i-down/blob/master/public/app/scripts/services/Auth.js'>https://github.com/davidchang/am-i-down/blob/master/public/app/scripts/services/Auth.js</a> with a simple demonstration of $q for promises in Angular.
+</p>
+
+<p>
+Then I wrote a bunch of code and finally got to the point where I could deploy.
+</p>
+
+<h2>
+Deploying to EC2
+</h2>
+
+<p>
+This might be better represented in bullet points - I didn't have an AMI that I knew would really fit (since I wanted nginx with Node), so I started from scratch:
+</p>
+
+<ul>
+<li>
+got an Ubuntu EC2 instance
+</li>
+<li>
+installed nginx (using Ubuntu section of <a href='http://blog.i-evaluation.com/2013/04/04/lannn-installing-nginx-on-aws/'>http://blog.i-evaluation.com/2013/04/04/lannn-installing-nginx-on-aws/</a>)
+</li>
+<li>
+installed node (<a href='https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-mint'>https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-mint</a>), since this is a Node app
+</li>
+<li>
+installed git, to download the repository from Github
+</li>
+<li>
+installed ruby, because I needed it to run grunt build for the Yeoman app(so I could install rvm, compass, following this link here: <a href='https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm'>https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm</a>, then "gem install compass")
+</li>
+<li>
+installed grunt-cli and bower globally through npm, also for the Yeoman app to work (npm install -g yo grunt-cli bower)
+</li>
+<li>
+installed mongodb for the database and ran screen; mongod; Ctrl+A+D to start the process and hide it in the background
+</li>
+</ul>
+
+<p>
+Now to download and run the code:
+</p>
+
+<pre>
+git clone git://github.com/davidchang/am-i-down.git
+cd am-i-down
+npm install
+cd public
+npm install, because the Yeoman app had its own large set of NPM dependencies
+bower install
+grunt build, to populate public/dist
+cd ../; npm install -g forever; forever start app.js, to start the Express server (and to do so "forever" - <a href='http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever'>http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever</a>)
+</pre>
+
+<p>
+When i go to my EC2 instance's public IP address, it only works if I connect to port 3000. For this, I'll modify the Nginx config to do a "proxyPass" from requests on port 80 (normal HTTP port) to 3000 (my Express app). I basically followed this: <a href='http://stackoverflow.com/questions/5009324/node-js-nginx-and-now'>http://stackoverflow.com/questions/5009324/node-js-nginx-and-now</a>
+</p>
+
+<p>
+I added:
+</p>
+
+<pre>
+upstream amidown {
+  server 127.0.0.1:3000;
+}
+</pre>
+
+<p>
+then changed location / rule to be this:
+</p>
+
+<pre>
+location / {
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header Host $http_host;
+  proxy_set_header X-NginX-Proxy true;
+
+  proxy_pass http://amidown/; #http://localhost:3000;
+  proxy_redirect off;
+}
+</pre>
+
+<p>
+then restarted nginx by running:
+</p>
+
+<pre>
+sudo /etc/init.d/nginx restart
+</pre>
+
+<p>
+Then, I wanted to point my own subdomain, am-i-down.davidandsuzi.com, to that EC2 instance. So I created an Elastic IP for the instance, then created an A Record that points my subdomain to that elastic IP address. This worked for me.
+</p>
