@@ -1,6 +1,6 @@
 --- 
 title: Building Am I Down
-description: 
+description: What I learned building Am I Down, an app that offers insight into behavioral trends, with Express/Yeoman/MongoDb and hosted on EC2
 tags: 
 - Code
 - david
@@ -21,20 +21,33 @@ category: David
 .img:hover {
     opacity: 1.0;
 }
+h2 {
+  padding-top: 40px;
+}
 </style>
 <p>
-<a href='http://am-i-down.davidandsuzi.com'><img class='img' src="../imgs/amIDown.png"/></a>
+<a href='http://am-i-down.davidandsuzi.com'><img class='img' src="../imgs/amIDownFullApp.png"/></a>
 </p>
 <p>
 <div>Site: <a href='http://am-i-down.davidandsuzi.com/'>http://am-i-down.davidandsuzi.com</a></div>
 <div>Code: <a href='https://github.com/davidchang/am-i-down'>https://github.com/davidchang/am-i-down</a></div>
 </p>
 
+<h2>Intro</h2>
+
 <p>
-Using Yeoman and using grunt (as a build system and to run a server with livereload) was a refreshing developer experience when I first started. But Yeoman is limited to the client side, and so getting the full stack to work was not immediately clear to me. Here's my best attempt, but suggestions to the workflow are more than welcome.
+Using Yeoman with Grunt (as a build system and to run a server with livereload) was a refreshing developer experience when I first started. But Yeoman is limited to the client side, and so getting the full stack to work was not immediately clear to me. Here's my best attempt to capture everything I learned from building the app, from beginning to end. I'd be a fool not to take suggestions - please let me know your thoughts.
 </p>
 
-<h2>Creating a Yeoman App Inside Express</h2>
+<h2>Contents:</h2>
+<ul>
+<li><a href='#creatingYeomanInsideExpress'>Creating a Yeoman App Inside Express</a></li>
+<li><a href='#runningExpressGruntServer'>Running Express Server and Grunt Server Together</a></li>
+<li><a href='#authenticationInAngular'>Doing Authentication in Angular</a></li>
+<li><a href='#deployingToEc2'>Deploying to EC2, Nginx, and A Records</a></li>
+</ul>
+
+<h2 id='creatingYeomanInsideExpress'>Creating a Yeoman App Inside Express</h2>
 
 <pre>
 express #so I created a new express app
@@ -66,7 +79,7 @@ app.configure('production', function(){
 I later added back routing to support authentication and some RESTful type calls.
 </p>
 
-<h2>
+<h2 id='runningExpressGruntServer'>
 Running Express Server and Grunt Server Together
 </h2>
 
@@ -140,8 +153,8 @@ compass: {
 You can view source at: <a href='https://github.com/davidchang/am-i-down/blob/master/public/Gruntfile.js'>https://github.com/davidchang/am-i-down/blob/master/public/Gruntfile.js</a>
 </p>
 
-<h2>
-Authentication in Angular
+<h2 id='authenticationInAngular'>
+Doing Authentication in Angular
 </h2>
 
 <p>
@@ -168,8 +181,8 @@ Here's the service: <a href='https://github.com/davidchang/am-i-down/blob/master
 Then I wrote a bunch of code and finally got to the point where I could deploy.
 </p>
 
-<h2>
-Deploying to EC2
+<h2 id='deployingToEc2'>
+Deploying to EC2, Nginx, and A Records
 </h2>
 
 <p>
@@ -256,3 +269,5 @@ sudo /etc/init.d/nginx restart
 <p>
 Then, I wanted to point my own subdomain, am-i-down.davidandsuzi.com, to that EC2 instance. So I created an Elastic IP for the instance, then created an A Record that points my subdomain to that elastic IP address. This worked for me.
 </p>
+
+<h2>Thanks for reading!</h2>
