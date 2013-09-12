@@ -21,7 +21,8 @@
               text-shadow: 2px 2px 2px #FFFF9D;
             }
             #wrapper {
-              width: 1080px;
+              max-width: 1080px;
+              width: 90%;
               margin: 0 auto;
               padding: 20px;
             }
@@ -90,6 +91,24 @@
               border: 3px solid #79BD8F;
               padding: 5px;
               background-color: #BEEB9F;
+            }
+            @media only screen 
+            and (max-width : 480px) {
+              #choices div {
+                width: 100%;
+              }
+              .options {
+                text-align: left;
+              }
+              .options ul li {
+                margin: 30px 0px;
+              }
+              .options ul li:first-child {
+                margin-top: 5px;
+              }
+              #whichDate {
+                font-size: 0.6em;
+              }
             }
         </style>
 
@@ -202,7 +221,7 @@
                 </div>
 
                 <div id='choose' class='options'>
-                    <h3>When finished, type the location of date you chose:</h3>
+                    <h3>When finished, type the location of the date that you choose:</h3>
                     <input id='whichDate' ng-model='whichDate' ng-change='work()'placeholder='ex: Westlake/Fremont'></input>
                 </div>
             </section>
