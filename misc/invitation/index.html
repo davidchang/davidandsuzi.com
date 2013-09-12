@@ -1,0 +1,213 @@
+<html ng-app>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
+
+        <style>
+            * {
+              font-family: 'Metrophobic', sans-serif !important;
+            }
+            body {
+              background-color: #BEEB9F;
+              color: #00A388;
+              text-shadow: 2px 2px 2px #FFFF9D;
+            }
+            #wrapper {
+              width: 1080px;
+              margin: 0 auto;
+              padding: 20px;
+            }
+            #wrapper section {
+              border: 7px solid #79BD8F;
+              padding: 15px;
+              margin-top: 5px;
+            }
+            #wrapper h3 {
+              margin-top: 10px;
+            }
+            #wrapper header {
+              margin-bottom: 25px;
+            }
+            #wrapper h1 {
+              margin-top: 0px;
+              margin-bottom: 20px;
+            }
+            #wrapper label {
+              margin-left: 5px;
+              font-size: 1.5em;
+              vertical-align: middle;
+            }
+            .checkboxHolder {
+              margin-top: -8px;
+            }
+            #cat img {
+              width: 100%;
+            }
+            button {
+              background-color: white;
+              color: #79BD8F;
+              margin-top: 20px;
+            }
+            #choices div {
+              float: left;
+              width: 33%;
+              text-align: center;
+            }
+            #choices label {
+              vertical-align: -3;
+            }
+            .options {
+              border-top: 2px solid #FFFF9D;
+              box-shadow: 0px -3px 0px #00A388;
+
+              margin-top: 25px;
+              font-size: 3em;
+              text-align: center;
+              padding-top: 20px;
+            }
+            .options ul {
+              list-style: none;
+            }
+            .options a:hover {
+              color: #428bca;
+            }
+            .marginTop {
+              margin-top: 20px;
+            }
+            #choose {
+              margin-bottom: 20px;
+            }
+            #whichDate {
+              color: #00A388;
+              border: 3px solid #79BD8F;
+              padding: 5px;
+              background-color: #BEEB9F;
+            }
+        </style>
+
+        <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js'></script>
+    </head>
+    <body>
+        <script>
+            function workCtrl($scope) {
+                $scope.work = function() {
+                    var t = $scope.whichDate.toLowerCase();
+                    if(t === 'westlake/fremont' || t === 'downtown seattle' || t === 'capitol hill') {
+                        alert('Great choice! I can\'t wait to go on that date with you! Unfortunately, I don\'t know which date you chose because it\'s 1:28am and I don\'t have enough time to program it. You\'ll have to call me up and tell me. Seriously though - can\'t wait!');
+                    }
+                }
+            }
+        </script>
+        <!--<div id='bg'></div>-->
+        <section id='wrapper' ng-controller='workCtrl'>
+            <section ng-hide='yes || no'>
+                <header>
+                    <h1>Dear Suzi,</h1>
+                    <h3>I love you.</h3>
+                    <h3>Will you go out with me?</h3>
+                </header>
+
+                <div>
+                    <h3>Please check yes or no:</h3>
+                    <div>
+                        <input ng-model='yes' type='checkbox' id='yes'/>
+                        <label for='yes'>Yes</label>
+                    </div>
+                    <div class='checkboxHolder'>
+                        <input ng-model='no' type='checkbox' id='no'/>
+                        <label for='no'>No</label>
+                    </div>
+                </div>
+
+                <div class='marginTop'>
+                    <h3>Yours,</h3>
+                    <h3>David</h3>
+                </div>
+            </section>
+
+            <section ng-show='no'>
+                <div id='cat'>
+                    <h1>:/ I understand. Maybe this picture will help change your mind?</h1>
+                    <img src='http://media.tumblr.com/tumblr_lm4jjtRgDq1qctkcl.jpg'></img>
+                    <button type='button' class='btn btn-lg' ng-click='no = false'>Try again</button>
+                </div>
+            </section>
+
+            <section ng-show='yes' ng-init='choices = "westlakeFremont"'>
+                <h1>Choose Your Pre-Planned Date:</h1>
+                <div id='choices' class='clearfix'>
+                    <div>
+                        <input type='radio' ng-model='choices' value='westlakeFremont' id='westlakeFremont'>
+                        <label for='westlakeFremont'>Westlake/Fremont</label>
+                    </div>
+                    <div>
+                        <input type='radio' ng-model='choices' value='downtown' id='downtown'>
+                        <label for='downtown'>Downtown Seattle</label>
+                    </div>
+                    <div>
+                        <input type='radio' ng-model='choices' value='capitolHill' id='capitolHill'>
+                        <label for='capitolHill'>Capitol Hill</label>
+                    </div>
+                </div>
+
+                <div class='options' ng-show='choices == "westlakeFremont"'>
+                    <ul>
+                        <li>
+                             Dinner at <a target='blank' href='http://www.pastafreska.com/'>Pasta Freska</a>
+                         </li>
+                         <li>
+                             Walk and Talk along <a target='blank' href='http://en.wikipedia.org/wiki/Lake_Union'>Lake Union</a>
+                         </li>
+                         <li>
+                             Dessert at <a target='blank' href='http://www.alamodeseattle.com/'>A la Mode Pies</a> in Fremont
+                         </li>
+                     </ul>
+                </div>
+
+                <div class='options' ng-show='choices == "downtown"'>
+                    <ul>
+                        <li>
+                             Maps at <a target='blank' href='http://www.metskers.com/'>Metsker Maps</a>
+                         </li>
+                         <li>
+                             Dinner at <a target='blank' href='http://www.bibimbapseattle.com/'>Bibimbap</a>
+                         </li>
+                         <li>
+                             <a target='blank' href='https://www.5thavenue.org/show/secondhand-lions'>Secondhand Lions</a> at <a target='blank' href='https://www.5thavenue.org/'>5th Avenue Theater</a>
+                         </li>
+                     </ul>
+                </div>
+
+                <div class='options' ng-show='choices == "capitolHill"'>
+                    <ul>
+                        <li>
+                             Dinner at <a target='blank' href='http://www.yelp.com/biz/marination-station-seattle-2'>Marination Station</a>
+                         </li>
+                         <li>
+                             Quiet time and talks at <a target='blank' href='http://www.bauhauscoffee.net/'>Bauhaus Coffee</a>
+                         </li>
+                         <li>
+                             Dessert at <a href='http://www.high5pie.com/'>High 5 Pie</a>
+                         </li>
+                     </ul>
+
+                </div>
+
+                <div id='choose' class='options'>
+                    <h3>When finished, type the location of date you chose:</h3>
+                    <input id='whichDate' ng-model='whichDate' ng-change='work()'placeholder='ex: Westlake/Fremont'></input>
+                </div>
+            </section>
+
+        </section>
+
+    </body>
+</html>
