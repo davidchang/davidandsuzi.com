@@ -1,0 +1,170 @@
+--- 
+title: NgReact - React Components in Angular
+description: Hacking a more optimized ng-repeat for Angular by using Facebook React components to handle the view. One version is 70% faster... and the other version is 450% slower. Pick it up via bower install ngReact.
+tags: 
+- Code
+- david
+meta: 
+  _edit_last: "1"
+status: publish
+layout: post
+type: post
+published: true
+category: David
+---
+<style>
+.img {
+    border: 2px solid gray;
+    padding: 10px;
+    opacity: 0.7;
+}
+.img:hover {
+    opacity: 1.0;
+}
+.intro {
+	border-bottom: 1px solid #EEE;
+	padding-bottom: 15px;
+}
+</style>
+
+<section class="intro">
+<div>Github: <a href="https://github.com/davidchang/ngReact">https://github.com/davidchang/ngReact</a></div>
+<div>Annotated source using Docco: <a href="http://davidchang.github.io/ngReact/docs/ngReact.html">http://davidchang.github.io/ngReact/docs/ngReact.html</a></div>
+<div>Bower: <code>bower install ngReact</code></div>
+</section>
+
+<p>
+A highly performant ng-repeat is like Angular's holy grail. Many people are looking for it and a few have rolled their own case-specific solutions with pretty impressive performance gains (<a href="blog.scalyr.com/2013/10/31/angularjs-1200ms-to-35ms/">blog.scalyr.com/2013/10/31/angularjs-1200ms-to-35ms/</a>). I thought I might add to the noise for my specific use case and an approach I haven't seen yet.
+</p>
+
+<p>
+At HasOffers, we have a need for a very basic ng-repeat. We don't need animations or watchers on individual rows; the only thing we really need is an ng-click, which is enough to dissuade us from writing a directive that renders static HTML every time the data changes.
+</p>
+
+<p>
+Facebook's React framework came out a few months ago and their docs say it is meant to be used on top of other frameworks. When I looked around, I saw React being used as the view component of Backbone, but I hadn't seen a connection made between React and Angular, besides this Quora post (<a href="http://www.quora.com/Pete-Hunt/Posts/Facebooks-React-vs-AngularJS-A-Closer-Look">http://www.quora.com/Pete-Hunt/Posts/Facebooks-React-vs-AngularJS-A-Closer-Look</a>) that explained that it was completely possible to use the two in conjunction. (By the way, if you are familiar with React internals, I would love to talk with you more.)
+</p>
+
+<p>
+Hence, the idea - write an ng-repeat directive in Angular that does all rendering via React. I implemented what I needed for my proof of concept, which is the support of ng-bind and ng-click (and the retaining of class and id attributes).
+</p>
+
+<p>
+Let's take a simple ng-repeat example first, written in pure Angular. This could probably get a lot better using bindonce or track-by, but that's another blog post. The HTML will be like this:
+</p>
+
+<pre>
+&lt;table class=&quot;table&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr ng-repeat=&quot;row in data&quot;&gt;
+      &lt;td&gt;{{row.0}}&lt;/td&gt;
+      &lt;td&gt;{{row.1}}&lt;/td&gt;
+      &lt;td&gt;{{row.2}}&lt;/td&gt;
+      &lt;td&gt;{{row.3}}&lt;/td&gt;
+      &lt;td&gt;{{row.4}}&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+
+<p>
+and the controller logic will be like this, that fills the data array with 500 objects; each object with five keys holding random numbers:
+</p>
+
+<pre>
+$scope.data = [];
+
+for(var i = 0; i < 500; ++i) {
+  $scope.data[i] = {};
+  for(var j = 0; j < 5; ++j) {
+    $scope.data[i][j] = Math.random();
+  }
+}
+</pre>
+
+<p>
+Rendering this takes 2.45 seconds for 10 iterations, hovering between 250 and 315 milliseconds for each data reload. The initial load is presumably the fastest because there are no nodes to delete - everything is new:
+</p>
+
+<a href="../imgs/ngReact-normal.png"><img class='img' src="../imgs/ngReact-normal.png"/></a>
+
+<p>
+I implemented two solutions via React, both initiated, called, and maintained from respective Angular directives. The first is called ngReactComponent, and allows you to write your React component explicitly. Your HTML would look like this:
+</p>
+
+<pre>
+&lt;table class=&quot;table&quot; ng-react-component=&quot;Repeater&quot; data=&quot;data&quot;&gt;&lt;/table&gt;
+</pre>
+
+<p>
+Your controller would be the same as above, and your React component would look something like this in JSX:
+</p>
+
+<pre>
+/** @jsx React.DOM */
+window.Repeater = React.createClass({
+  render: function() {
+
+    var scope = this.props.scope;
+
+    var rows = _.map(scope.data, function(datum) {
+      var clickHandler = scope.$apply.bind(
+        scope,
+        scope.clickHandler.bind(null, datum)
+      );
+
+      return (
+        &lt;tr onClick={clickHandler}&gt;
+          &lt;td&gt;{datum['0']}&lt;/td&gt;
+          &lt;td&gt;{datum['1']}&lt;/td&gt;
+          &lt;td&gt;{datum['2']}&lt;/td&gt;
+          &lt;td&gt;{datum['3']}&lt;/td&gt;
+          &lt;td&gt;{datum['4']}&lt;/td&gt;
+        &lt;/tr&gt;
+      );
+    });
+
+    return (
+      &lt;tbody&gt;
+        {rows}
+      &lt;/tbody&gt;
+    );
+  }
+});
+</pre>
+
+<p>
+Rendering this takes 803ms for 10 iterations, hovering around 35 and 55ms for each data reload (that's 67% faster). You'll notice that the first load takes a little longer than successive loads, and the second load REALLY struggles - here, it's 433ms, which is more than half of the total time!
+</p>
+
+<a href="../imgs/ngReact-react.png"><img class='img' src="../imgs/ngReact-react.png"/></a>
+
+<p>
+The second way I came up with using React is called ngReactRepeat and it uses transclusion so that you don't have to explicitly declare your React Component. You just attach the directive on and it creates React components out of your markup. So your HTML still looks basically the same as the first example in pure Angular:
+</p>
+
+<pre>
+&lt;table class=&quot;table&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr ng-react-repeat=&quot;row in data&quot; ng-click=&quot;clickHandler(row)&quot;&gt;
+      &lt;td ng-bind=&quot;row.0&quot;&gt;&lt;/td&gt;
+      &lt;td ng-bind=&quot;row.1&quot;&gt;&lt;/td&gt;
+      &lt;td ng-bind=&quot;row.2&quot;&gt;&lt;/td&gt;
+      &lt;td ng-bind=&quot;row.3&quot;&gt;&lt;/td&gt;
+      &lt;td ng-bind=&quot;row.4&quot;&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+
+<p>
+Rendering this takes… 13.4s for 10 iterations, around 1.25s for each data reload. Ouch. That's almost 450% slower. I'm not sure if I'm doing something wrong and losing the React magic, but this is unmistakably TERRIBLE:
+<p>
+
+<a href="../imgs/ngReact-react.png"><img class='img' src="../imgs/ngReact-react-transclude.png"/></a>
+
+<p>
+Let's go back to that first solution, though - it's actually pretty nifty! If we can figure out if that second reload can be reduced, we'd be looking at a pretty solid solution. ngReactComponent is written so that it is a bit abstract and could potentially be used as the entry point for any React component, but I wrote it specifically with ng-repeat in mind, so it might not be the most generalized.
+</p>
+
+<p>
+If you made it this far, thanks for reading. I do appreciate it! If you have an understanding of React, I'd love to hear your thoughts and explanations, and to see if we can get that react-transclude version any better.
+</p>
