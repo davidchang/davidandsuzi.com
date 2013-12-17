@@ -1,10 +1,10 @@
---- 
+---
 title: NgReact - React Components in Angular
 description: Hacking a more optimized ng-repeat for Angular by using Facebook React components to handle the view. One version is 70% faster... and the other version is 450% slower. Pick it up via bower install ngReact.
-tags: 
+tags:
 - Code
 - david
-meta: 
+meta:
   _edit_last: "1"
 status: publish
 layout: post
@@ -57,11 +57,11 @@ Let's take a simple ng-repeat example first, written in pure Angular. This could
 &lt;table class=&quot;table&quot;&gt;
   &lt;tbody&gt;
     &lt;tr ng-repeat=&quot;row in data&quot;&gt;
-      &lt;td&gt;%7B%7Brow.0%7D%7D&lt;/td&gt;
-      &lt;td&gt;%7B%7Brow.1%7D%7D&lt;/td&gt;
-      &lt;td&gt;%7B%7Brow.2%7D%7D&lt;/td&gt;
-      &lt;td&gt;%7B%7Brow.3%7D%7D&lt;/td&gt;
-      &lt;td&gt;%7B%7Brow.4%7D%7D&lt;/td&gt;
+      &lt;td ng-bind=&quot;row.0&quot;&gt;&lt;/td&gt;
+      &lt;td ng-bind=&quot;row.1&quot;&gt;&lt;/td&gt;
+      &lt;td ng-bind=&quot;row.2&quot;&gt;&lt;/td&gt;
+      &lt;td ng-bind=&quot;row.3&quot;&gt;&lt;/td&gt;
+      &lt;td ng-bind=&quot;row.4&quot;&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</pre>
