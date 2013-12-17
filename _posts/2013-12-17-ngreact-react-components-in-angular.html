@@ -34,7 +34,7 @@ category: David
 </section>
 
 <p>
-A highly performant ng-repeat is like Angular's holy grail. Many people are looking for it and a few have rolled their own case-specific solutions with pretty impressive performance gains (<a href="blog.scalyr.com/2013/10/31/angularjs-1200ms-to-35ms/">blog.scalyr.com/2013/10/31/angularjs-1200ms-to-35ms/</a>). I thought I might add to the noise for my specific use case and an approach I haven't seen yet.
+Angular performance begins to drag when you put a lot of elements on the page, like if you were rendering a large list. Some have come up with their own solutions and gotten pretty impressive performance gains (<a href="blog.scalyr.com/2013/10/31/angularjs-1200ms-to-35ms/">blog.scalyr.com/2013/10/31/angularjs-1200ms-to-35ms/</a>). Here's an approach I haven't seen yet, but showed nearly a 70% improvement in rudimentary testing.
 </p>
 
 <p>
@@ -42,11 +42,11 @@ At HasOffers, we have a need for a very basic ng-repeat. We don't need animation
 </p>
 
 <p>
-Facebook's React framework came out a few months ago and their docs say it is meant to be used on top of other frameworks. When I looked around, I saw React being used as the view component of Backbone, but I hadn't seen a connection made between React and Angular, besides this Quora post (<a href="http://www.quora.com/Pete-Hunt/Posts/Facebooks-React-vs-AngularJS-A-Closer-Look">http://www.quora.com/Pete-Hunt/Posts/Facebooks-React-vs-AngularJS-A-Closer-Look</a>) that explained that it was completely possible to use the two in conjunction. (By the way, if you are familiar with React internals, I would love to talk with you more.)
+Facebook's React framework came out a few months ago and their docs say it is meant to be used on top of other frameworks. When I looked around, I saw React being used as the view component of Backbone, but I hadn't seen a connection made between React and Angular, besides this Quora post (<a href="http://www.quora.com/Pete-Hunt/Posts/Facebooks-React-vs-AngularJS-A-Closer-Look">http://www.quora.com/Pete-Hunt/Posts/Facebooks-React-vs-AngularJS-A-Closer-Look</a>) that explained that it was possible.
 </p>
 
 <p>
-Hence, the idea - write an ng-repeat directive in Angular that does all rendering via React. I implemented what I needed for my proof of concept, which is the support of ng-bind and ng-click (and the retaining of class and id attributes).
+Hence, the idea - write a directive in Angular that does all of the rendering via React.
 </p>
 
 <p>
@@ -57,17 +57,17 @@ Let's take a simple ng-repeat example first, written in pure Angular. This could
 &lt;table class=&quot;table&quot;&gt;
   &lt;tbody&gt;
     &lt;tr ng-repeat=&quot;row in data&quot;&gt;
-      &lt;td&gt;{{row.0}}&lt;/td&gt;
-      &lt;td&gt;{{row.1}}&lt;/td&gt;
-      &lt;td&gt;{{row.2}}&lt;/td&gt;
-      &lt;td&gt;{{row.3}}&lt;/td&gt;
-      &lt;td&gt;{{row.4}}&lt;/td&gt;
+      &lt;td&gt;%7B%7Brow.0%7D%7D&lt;/td&gt;
+      &lt;td&gt;%7B%7Brow.1%7D%7D&lt;/td&gt;
+      &lt;td&gt;%7B%7Brow.2%7D%7D&lt;/td&gt;
+      &lt;td&gt;%7B%7Brow.3%7D%7D&lt;/td&gt;
+      &lt;td&gt;%7B%7Brow.4%7D%7D&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</pre>
 
 <p>
-and the controller logic will be like this, that fills the data array with 500 objects; each object with five keys holding random numbers:
+and the controller will fill a data array with 500 objects; each object will have five random numbers:
 </p>
 
 <pre>
@@ -156,7 +156,7 @@ The second way I came up with using React is called ngReactRepeat and it uses tr
 &lt;/table&gt;</pre>
 
 <p>
-Rendering this takes… 13.4s for 10 iterations, around 1.25s for each data reload. Ouch. That's almost 450% slower. I'm not sure if I'm doing something wrong and losing the React magic, but this is unmistakably TERRIBLE:
+Rendering this takes... 13.4s for 10 iterations, around 1.25s for each data reload. Ouch. That's almost 450% slower. I'm not sure if I'm doing something wrong and losing the React magic, but this is unmistakably TERRIBLE:
 <p>
 
 <a href="../imgs/ngReact-react.png"><img class='img' src="../imgs/ngReact-react-transclude.png"/></a>
