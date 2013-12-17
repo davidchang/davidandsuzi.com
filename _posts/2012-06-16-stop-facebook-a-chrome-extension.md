@@ -26,10 +26,8 @@ I also realize that I'll open a Facebook window, check my news feed, close out o
 With this usage in mind, I wrote Stop Facebook. It should let me be on Facebook when I am using it to stay connected. It should kick me off when I'm wasting time.
 
 Here are the basic ways it works:
-<ol>
-	<li>If you have notifications, it will always let you onto Facebook. Each notification gives you a certain amount of time you can be on Facebook.</li>
-	<li>If you don't have any notifications and you haven't been on Facebook in the past 3 hours, you can be on Facebook for the next 3 minutes.</li>
-	<li>You will only get kicked off of Facebook on actual page reloads. Facebook doesn't actually reload the page when you're navigating around - so it won't interrupt you in the middle of a wall post or message. Once you've used your time up, it will still only be able to kick you off if you refresh the page or close and reopen Facebook (which I do frequently).</li>
-</ol>
+1. If you have notifications, it will always let you onto Facebook. Each notification gives you a certain amount of time you can be on Facebook.
+2. If you don't have any notifications and you haven't been on Facebook in the past 3 hours, you can be on Facebook for the next 3 minutes.
+3. You will only get kicked off of Facebook on actual page reloads. Facebook doesn't actually reload the page when you're navigating around - so it won't interrupt you in the middle of a wall post or message. Once you've used your time up, it will still only be able to kick you off if you refresh the page or close and reopen Facebook (which I do frequently).
 
-You can download the extension by clicking <a href="http://davidandsuzi.com/misc/stop-facebook.crx">here</a> and view the source on Github <a href="https://github.com/davidchang/stop-facebook">here</a>.
+You can download the extension [here](http://davidandsuzi.com/misc/stop-facebook.crx) and view the source on Github [here](https://github.com/davidchang/stop-facebook).
