@@ -13,13 +13,13 @@ category: David
 ---
 I had an awesome time at the Seattle Marathon on December 1st, a few weeks ago.
 
-It was my first marathon and I was very much ill-prepared. Two other guys from church signed up for it several months in advance and I had put in a little bit of training, but basically stopped around the same time our marathon training plan had us doing 12 miles. Around that time, I started feeling overwhelmed with different responsibilities between work, church, and marriage, and I couldn't do everything I wanted to do. I was only running once a week, and that was the long run I was doing with the other guys who also signed up. Since the marathon was my lowest priority, it got cut out. I stopped training and told myself that I would just run the half or something. When it hit November, I started thinking I would just go for it, even though I still didn't have any long runs under my belt (it was probably NCAA cross country championships going on). Even then, it wasn't until the preceding week that I actually made the time to run, and even then that was just 2 12 milers.
+It was my first marathon and I was very much ill-prepared. Two other guys from church signed up for it several months in advance and I had put in a little bit of training, but basically stopped around the same time our marathon training plan had us doing 12 miles. Around that time, I started feeling overwhelmed with different responsibilities between work, church, and marriage, and I couldn't do everything I wanted to do. I was only running once a week, and that was the long run I was doing with the other guys who had signed up. Since the marathon was my lowest priority, it was the first to go. I stopped training and told myself that I would just run the half or something. When it hit November, I started thinking I would just go for it, even though I wasn't running any more than before. Even then, it wasn't until the preceding week that I actually made the time to run, and even then, that was just 2 12 milers.
 
-My reasons for running were:
+### My reasons for running
 
-- I know plenty of people who have taken up running lately, plenty of people who are faster than me. My cousin in Texas is winning races and doing ultras. 100 miles. Literally. But a lot of the emerging marathon culture, I feel, is to serve as a statement of what someone can achieve when they believe in themselves. I don't believe that and want to speak against that, to say "look at what God achieves and how great God is when I believe in Him. You might be running this race symbolically for yourself and for how awesome you think you are, but I am running this race symbolically for God and how awesome I think God is."
+- I know plenty of people who have taken up running lately, plenty of people who are faster than me. My cousin in Texas is doing ultras and winning some of them. 100 miles. Literally. But a lot of the emerging marathon culture, I feel, is to serve as a statement of what someone can achieve when they believe in themselves. I don't believe that and want to speak against that, to say "look at what God achieves and how great God is when I believe in Him. You might be running this race symbolically for yourself and for how awesome you think you are, but I am running this race symbolically for God and how awesome I think God is."
 
-- I enjoy running and doing a marathon had been one of my goals since running in high school. When I first started running in high school, I felt like God would reveal Himself to me in it, like the guy in Chariots of Fire who said that he runs because he feels God's pleasure by it.
+- I enjoy running and doing a marathon had been one of my goals since running in high school. When I first started running in high school, I felt like God would reveal Himself to me in it, like that guy Eric Liddell in Chariots of Fire who said that he feels God's pleasure when he runs.
 
 - I think God sometimes uses physical means to teach spiritual ends; by running a distance much beyond myself, perhaps I could instill in myself a more disciplined and self-controlled character and a realization that God has made me to be strong and not timid in Him (like 2 Timothy 1:7, though I definitely think that is more about spiritual strength than physical or mental strength). Maybe I could fight sin with greater passion knowing that if God can enable me physically, how much more has He enabled me to overcome spiritually (Matthew 9:5)!
 
@@ -33,10 +33,30 @@ Those next 5 miles were marked by cramps almost every quarter mile. Calves and t
 
 I know I got 1432nd place, but it meant a lot to me. I didn't walk, I didn't quit. For God - it was Him who was on my mind during the cramps, praying I would learn to endure anything for His name's sake.
 
-The highlights of the race were:
+### The highlights of the race
 
 - Running the first 21 miles with Tim and having a really good time talking. Tim kept me going on a devastating hill right before mile 21. On that hill, there was literally a point where I felt like I couldn't keep going - at that exact point, I barely caught up to Tim and cried, "Tim - come on!" and we fought to the top together. Once we got there, I asked him to tell me something encouraging. And I didn't quit.
 
 - Running through the Amazon campus in the last mile... it dawned on me how crazy it is that I live here in Seattle and have been able to have a good career and found a church with people like Tim who are spiritually involved and even invested in my life and challenge me to do things as ridiculous as trying to run a marathon. God has shown me a lot of favor over the last few years, especially considering the trajectory of my life and what should have been my end.
 
 - The last 5 miles seemed physically impossible, but it really was a highlight. Fighting for something, giving my all to it... it felt like a shadow of the Hebrews 12 race of faith. It's something I'll never forget. I pray I run the same way towards the perfection of my faith, completely unwilling to slow down, completely unwilling to entertain secondary pursuits and anything that slows me down.
+
+### Why I don't see myself running another one
+
+I see how easy it is to get sucked up into the marathon culture. You get a gratifying feeling that you are:
+
+- A part of something greater
+
+- Surrounded by hundreds or thousands of others going after the same thing you are and encouraging you along the way
+
+- "Achieving a better you"
+
+At the end of the day, I know these things are what drive people in our culture - I bet nearly everyone can identify these as very basic human incentives. But I know that marathoning can't give those things to me. My mental or physical toughness will eventually fade away, my accomplishments forgotten and trivialized.
+
+1 Timothy 4:8 says that bodily training is of some value... but it is spiritual training that is of all value, all benefit: "Train yourself for godliness; for while bodily training is of some value, godliness is of value in every way, as it holds promise for the present life and also for the life to come."
+
+Paul also writes in 1 Corinthians 9:24-26 that we should run with all of our hearts, with everything we have, that we should never stop training. But if running is all that we ever do, we'll be running aimlessly, and at the end, all we will have accomplished will be perishable. But if we run wholeheartedly, with everything that we have, towards what matters - towards God Himself - then we will have an imperishable reward.
+
+"Do you not know that in a race all the runners run, but only one receives the prize? So run that you may obtain it. Every athlete exercises self-control in all things. They do it to receive a perishable wreath, but we an imperishable. So I do not run aimlessly..."
+
+Ultimately, this bodily training will be worthless, perishable. What does matter? Knowing God and enjoying Him forever. So for me, I won't be giving myself, my primary affections, and the priority of my time, to marathoning, but to God Himself. And that may include some casual running, but I'd be surprised if God intends anything more than that for me.

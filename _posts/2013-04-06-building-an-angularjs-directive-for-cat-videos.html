@@ -1,9 +1,9 @@
---- 
+---
 title: Building an AngularJS Directive for Cat Videos
-tags: 
+tags:
 - Code
 - david
-meta: 
+meta:
   _edit_last: "1"
 status: publish
 layout: post
@@ -24,7 +24,7 @@ Let's get the HTML embed for a funny cat video.
 </pre>
 
 <p>
-Nice. now I'll take a plunkr from this <a href="http://www.adobe.com/devnet/html5/articles/angularjs-directives-and-the-computer-science-of-javascript.html?utm_source=javascriptweekly&utm_medium=email#articlecontentAdobe_numberedheader_1">Adobe article</a> about writing AngularJS directives. 
+Nice. now I'll take a plunkr from this <a href="http://www.adobe.com/devnet/html5/articles/angularjs-directives-and-the-computer-science-of-javascript.html?utm_source=javascriptweekly&utm_medium=email#articlecontentAdobe_numberedheader_1">Adobe article</a> about writing AngularJS directives.
 </p>
 
 <p>
@@ -93,7 +93,7 @@ Here's the JS:
 var app = angular.module('angularjs-starter', ['mydirectives']);
 
 app.controller('MainCtrl', function($scope) {
-  
+
 });
 
 // add a namespace for custom directives
@@ -101,7 +101,7 @@ angular.module('mydirectives', []);
 
 angular.module('mydirectives').directive('youtube', function() {
   return {
-    scope: { code:'@code' },
+    scope: { code:'@' },
     template: '&lt;div style="height:400px;"&gt;&lt;iframe style="overflow:hidden;height:100%;width:100%" width="100%" height="100%" src="http://www.youtube.com/embed/{{code}}" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;'
   };
 });
@@ -138,7 +138,7 @@ Does it work with multiple instances of the directive?
 </p>
 
 <p>
-Yup, though I'm not sure why. I'm guessing because there is a scope defined in the directive.
+Yes.
 </p>
 
 <pre>
@@ -147,7 +147,7 @@ Yup, though I'm not sure why. I'm guessing because there is a scope defined in t
     &lt;youtube code='wf_IIbT8HGk'&gt;&lt;/youtube&gt;
 &lt;/body&gt;
 </pre>
-  
+
 <p>
 Here's the same plunkr with twice as many cats: <a href='http://plnkr.co/edit/lHs6S9z1iNobnP6u2xIH?p=preview'>http://plnkr.co/edit/lHs6S9z1iNobnP6u2xIH?p=preview</a>
 </p>
