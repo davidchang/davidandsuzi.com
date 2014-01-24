@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Say Hi to Suzi for her Birthday!</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <style>
+      .wrap {
+        max-width: 960px;
+        padding: 10px 20px;
+        margin-bottom: 60px;
+      }
+      #videoContainer, #previewImage {
+        width: 640px;
+        height: 480px;
+        background-color: #34495e;
+        margin: 15px 0px;
+      }
+      #previewImage {
+        background-color: #1abc9c;
+      }
+      #snap, #send {
+        background-color: #3498db;
+        color: #ecf0f1;
+      }
+      #again {
+        background-color: #c0392b;
+        color: #ecf0f1;
+      }
+      #send {
+        margin-top: 10px;
+      }
+      #sendingPicture {
+        display: none;
+        width: 640px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="wrap">
+      <h1>Please Say Hi to Suzi for her Birthday!</h1>
+      <h3>We may not have seen you recently because we moved away, but I know Suzi would love to see your smiling faces! Please send her a GIF and a message for her birthday! (I'm keeping this a secret until Sunday)</h3>
+      <h5>[You'll need to enable webcam access and use a modern desktop browser]</h5>
+      <h5>[If you have a modern desktop browser and you see an error, try again a few times?]</h5>
+
+      <section id="takingPicture">
+        <div id="videoContainer"></div>
+        <div id="snapHolder">
+          <button id="snap" class="btn">Shoot GIF Soon</button>
+          <span id="countdown-text"></span>
+        </div>
+      </section>
+
+      <section id="sendingPicture">
+        <h3>Generated GIF:</h3>
+        <h5>If you're unsatisfied, you can always <button id="again" class="btn">try again</button></h5>
+        <img id="previewImage"></img>
+        <textarea id="message" placeholder="Please leave Suzi a 'Happy Birthday!' sort of message here!" class="form-control" rows="3"></textarea>
+        <button id="send" class="btn">Send GIF and message</button>
+      </section>
+    </div>
+
+    <canvas style="display: none;" id="canvas" width="640" height="480"></canvas>
+
+
+
+    <script src="gumhelper.js"></script>
+    <script src="Animated_GIF.min.js"></script>
+    <script src='https://cdn.firebase.com/js/client/1.0.2/firebase.js'></script>
+
+    <script>
+      // Grab elements, create settings, etc.
+      var canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d"),
+        gumHelper = window.GumHelper,
+        videoContainer = document.getElementById('videoContainer'),
+        previewImg = document.getElementById('previewImage'),
+        $takingPicture = document.getElementById('takingPicture'),
+        $sendingPicture = document.getElementById('sendingPicture'),
+        $countdown = document.getElementById('countdown-text'),
+        video,
+        gifSource;
+
+      ///////////////////////
+
+      if(navigator.getMedia) {
+        gumHelper.startVideoStreaming(function(err, stream, videoElement) {
+          if(err) {
+            window.alert(err.message);
+          } else {
+            videoContainer.appendChild(videoElement);
+            video = videoElement;
+          }
+        });
+      } else {
+        window.alert(':/ looks like your browser does not support getUserMedia - could you get Chrome on a desktop?');
+      }
+
+      ///////////////////////
+      var fb = new Firebase("https://davidchang.firebaseio.com/happyBirthday/data/");
+
+      document.getElementById('send').addEventListener('click', function() {
+        var now = new Date();
+        fb.push({
+          'src'     : gifSource,
+          'message' : document.getElementById('message').value,
+          'now'     : now
+        }, function(error) {
+          if (!error) {
+            //clear and restart everything
+            document.getElementById('message').value = '';
+
+            $takingPicture.style.display = 'block';
+            $takingPicture.style.opacity = '1.0';
+            $sendingPicture.style.display = 'none';
+            $countdown.innerHTML = '';
+
+            alert('thanks! please feel free to send as many gifs as you\'d like!!!');
+          } else {
+            alert('oh man. something went wrong. please tell david');
+          }
+        });
+      });
+
+      document.getElementById('again').addEventListener('click', function() {
+        $takingPicture.style.display = 'block';
+        $takingPicture.style.opacity = '1.0';
+        $sendingPicture.style.display = 'none';
+        $countdown.innerHTML = '';
+      });
+
+      // Trigger photo take
+      document.getElementById("snap").addEventListener("click", function() {
+        var counter = 3;
+        $countdown.innerHTML = 'Starting in ' + counter + '...';
+        counter--;
+        var interval = setInterval(function() {
+          if (!counter) {
+            $countdown.innerHTML = 'Recording for ~3 seconds...';
+            clearInterval(interval);
+            return;
+          }
+          $countdown.innerHTML = 'Starting in ' + counter + '...';
+          counter--;
+        }, 1000);
+
+        setTimeout(function() {
+          capture(function(image) {
+            gifSource = image;
+            previewImg.src = image;
+
+            $takingPicture.style.display = 'none';
+            $sendingPicture.style.display = 'block';
+          }, function() {
+            //intermediate
+            $takingPicture.style.opacity = 0.6;
+            $countdown.innerHTML = 'Saving...';
+          });
+        }, 3000);
+      });
+
+      var capture = function (callback, priorToGifCallback) {
+        var numFrames = 10,
+          interval = 0.3;
+
+        var pendingFrames = numFrames;
+        var ag = new Animated_GIF({ workerPath: 'Animated_GIF.worker.min.js' });
+        ag.setSize(640, 480);
+        ag.setDelay(interval);
+
+        captureFrame();
+
+        function captureFrame() {
+          ag.addFrame(video);
+          pendingFrames--;
+
+          if(pendingFrames > 0) {
+            setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
+          } else {
+            priorToGifCallback && priorToGifCallback();
+
+            ag.getBase64GIF(function(image) {
+
+              // Ensure workers are freed-so we avoid bug #103 https://github.com/meatspaces/meatspace-chat/issues/103
+              ag.destroy();
+
+              callback(image);
+            });
+          }
+        }
+      };
+
+    </script>
+
+  </body>
+</html>
