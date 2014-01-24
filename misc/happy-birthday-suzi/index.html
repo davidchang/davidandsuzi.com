@@ -68,6 +68,12 @@
     <script src="gumhelper.js"></script>
     <script src="Animated_GIF.min.js"></script>
     <script src='https://cdn.firebase.com/js/client/1.0.2/firebase.js'></script>
+    <script>
+      var _gaq=[['_setAccount','UA-35626315-1'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
 
     <script>
       // Grab elements, create settings, etc.
@@ -92,8 +98,10 @@
             videoContainer.appendChild(videoElement);
             video = videoElement;
           }
+          _gaq.push(['_trackEvent', 'happy-birthday-suzi', 'support']);
         });
       } else {
+        _gaq.push(['_trackEvent', 'happy-birthday-suzi', 'noSupport']);
         window.alert(':/ looks like your browser does not support getUserMedia - could you get Chrome on a desktop?');
       }
 
@@ -116,8 +124,10 @@
             $sendingPicture.style.display = 'none';
             $countdown.innerHTML = '';
 
+            _gaq.push(['_trackEvent', 'happy-birthday-suzi', 'saveSuccess']);
             alert('thanks! please feel free to send as many gifs as you\'d like!!!');
           } else {
+            _gaq.push(['_trackEvent', 'happy-birthday-suzi', 'saveFailure']);
             alert('oh man. something went wrong. please tell david');
           }
         });
@@ -154,7 +164,7 @@
             $sendingPicture.style.display = 'block';
           }, function() {
             //intermediate
-            $takingPicture.style.opacity = 0.6;
+            $takingPicture.style.opacity = 0.4;
             $countdown.innerHTML = 'Saving...';
           });
         }, 3000);
@@ -166,7 +176,7 @@
 
         var pendingFrames = numFrames;
         var ag = new Animated_GIF({ workerPath: 'Animated_GIF.worker.min.js' });
-        ag.setSize(640, 480);
+        ag.setSize(320, 240);
         ag.setDelay(interval);
 
         captureFrame();
