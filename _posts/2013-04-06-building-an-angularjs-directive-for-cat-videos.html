@@ -28,16 +28,13 @@ Nice. now I'll take a plunkr from this <a href="http://www.adobe.com/devnet/html
 </p>
 
 <p>
-Here's the JS:
+Here's the JS, slightly simplified:
 </p>
 
 <pre>
-var app = angular.module('angularjs-starter', ['mydirectives']);
+var app = angular.module('cat-video-demo', []);
 
-// add a namespace for custom directives
-angular.module('mydirectives', []);
-
-angular.module('mydirectives').directive('youtube', function() {
+angular.module('cat-video-demo').directive('youtube', function() {
   return {
     restrict: 'E',
     template: '&lt;iframe width="420" height="315" src="http://www.youtube.com/embed/IytNBm8WA1c" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;'
@@ -54,7 +51,7 @@ and now the HTML to use that would be the &lt;youtube&gt; element, as restricted
 </pre>
 
 <p>
-Maybe we want it to be somewhat responsive - Stackoverflow search turns up this <a href='http://stackoverflow.com/questions/5867985/iframe-100-height'>answer</a>, so now we have this:
+Maybe we want it to be somewhat responsive - StackOverflow search turns up this <a href='http://stackoverflow.com/questions/5867985/iframe-100-height'>answer</a>, so now we have this:
 </p>
 
 <pre>
@@ -66,7 +63,7 @@ Now let's say we want to define the video code in the &lt;youtube&gt; element, s
 </p>
 
 <p>
-Actually, let's write some valid HTML. That means make the restriction on an attribute:
+If we wanted to write some valid HTML, we need to allow the directive to be used on an attribute:
 </p>
 
 <pre>
@@ -74,7 +71,7 @@ restrict: 'A'
 </pre>
 
 <p>
-Or just plain remove it, since the default restriction is attribute. And change the HTML to
+Or just plain remove that restrict property, since it will default to attribute. And change the HTML to
 </p>
 
 <pre>
@@ -82,7 +79,7 @@ Or just plain remove it, since the default restriction is attribute. And change 
 </pre>
 
 <p>
-Actually, this is just like the example from the AngularJS docs: <a href='http://docs.angularjs.org/guide/directive'>http://docs.angularjs.org/guide/directive</a>
+Now if we want to pass in that Youtube code, we're going to do so by passing in the value. That's done so using the '@' - we don't need a binding to that variable since we won't be modifying it or anything (that would be the '='), we're just reading it off.
 </p>
 
 <p>
@@ -90,19 +87,12 @@ Here's the JS:
 </p>
 
 <pre>
-var app = angular.module('angularjs-starter', ['mydirectives']);
+var app = angular.module('cat-video-demo', []);
 
-app.controller('MainCtrl', function($scope) {
-
-});
-
-// add a namespace for custom directives
-angular.module('mydirectives', []);
-
-angular.module('mydirectives').directive('youtube', function() {
+angular.module('cat-video-demo').directive('youtube', function() {
   return {
     scope: { code:'@' },
-    template: '&lt;div style="height:400px;"&gt;&lt;iframe style="overflow:hidden;height:100%;width:100%" width="100%" height="100%" src="http://www.youtube.com/embed/{{code}}" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;'
+    template: '&lt;div style="height:400px;"&gt;&lt;iframe style="overflow:hidden;height:100%;width:100%" width="100%" height="100%" src="http://www.youtube.com/embed/&#123;&#123;code&#125;&#125;" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;'
   };
 });
 </pre>
@@ -112,7 +102,7 @@ Here's the HTML now:
 </p>
 
 <pre>
-&lt;body ng-controller="MainCtrl"&gt;
+&lt;body&gt;
     &lt;div data-youtube data-code='IytNBm8WA1c'&gt;&lt;/div&gt;
 &lt;/body&gt;
 </pre>
@@ -130,7 +120,7 @@ Bam!
 </p>
 
 <p>
-Here's the plunkr: <a href='http://plnkr.co/edit/5fptRcUqi3RIQXJ1426s?p=preview'>http://plnkr.co/edit/5fptRcUqi3RIQXJ1426s?p=preview</a>
+Here's the <a href='http://plnkr.co/edit/RJSelITrtMC15dr4dPzD?p=preview'>plunkr</a>.
 </p>
 
 <p>
@@ -149,7 +139,7 @@ Yes.
 </pre>
 
 <p>
-Here's the same plunkr with twice as many cats: <a href='http://plnkr.co/edit/lHs6S9z1iNobnP6u2xIH?p=preview'>http://plnkr.co/edit/lHs6S9z1iNobnP6u2xIH?p=preview</a>
+Here's the same <a href='http://plnkr.co/edit/alGTmk9cnxyqDDquzzb8?p=preview'>plunkr</a> with twice as many cats.
 </p>
 
 <p>
@@ -157,16 +147,19 @@ Does it work with ng-repeat?
 </p>
 
 <pre>
-app.controller('MainCtrl', function($scope) {
-  $scope.videos = ['IytNBm8WA1c', 'wf_IIbT8HGk']
-});
-
-&lt;youtube code='&#123;&#123;video&#125;&#125;' ng-repeat='video in videos'&gt;&lt;/youtube&gt;
+&lt;youtube code='&#123;&#123;video&#125;&#125;' ng-repeat="video in ['IytNBm8WA1c', 'wf_IIbT8HGk']"&gt;&lt;/youtube&gt;
 </pre>
 
-<a href='http://plnkr.co/edit/TxzGF93mnzrUJCGzLB9e?p=preview
-'>http://plnkr.co/edit/TxzGF93mnzrUJCGzLB9e?p=preview</a>
+Here's that <a href='http://plnkr.co/edit/kv8fFBYk6YwUfyQFAtSP?p=preview'>plunkr</a>.
 
 <p>
 High five Angular!
+</p>
+
+<p>
+Originally written April 6, 2013.
+</p>
+
+<p>
+Edited May 16, 2014 to clean up with better Angular practices. Originally, the code snippets created an angular module for the app and one for dependencies (as was in the Adobe article), which was overkill for this simpler demo. Also, a basically empty controller was removed as it was completely unnecessary for the demo. Plunkers updated respectively.
 </p>
