@@ -11,7 +11,7 @@ type: post
 published: true
 category: David
 ---
-The first real project I did with Angular was documented a year ago in this [blog post](http://davidandsuzi.com/building-a-feed-reader-with-angularjs/). It was a really simple app that illustrated the power and potential of Angular, but since I've been working in Angular for the past year, I recently revisited this article and noticed a handful of anti-patterns.
+The first real project I did with Angular was documented a year ago in this [blog post](/building-a-feed-reader-with-angularjs/). It was a really simple app that illustrated the power and potential of Angular, but since I've been working in Angular for the past year, I recently revisited this article and noticed a handful of anti-patterns.
 
 If you don't go back and read that post, I don't blame you. It's long.
 
@@ -45,7 +45,7 @@ And that controlled this toggleTheme element:
 
 What I should have done:
 
-    <button class="btn" ng-click="darkTheme = true"><span>Toggle Dark/Light Theme</span></button>
+    <button class="btn" ng-click="darkTheme = !darkTheme"><span>Toggle Dark/Light Theme</span></button>
 
 Which would set $scope.darkTheme to true. I want to see this scope value on my body element, which is currently one step above my ng-controller, so I could have set $rootScope.darkTheme = true, or what I should really do is move my ng-controller onto body and remove it from the div element it had been on. So this:
 
@@ -91,18 +91,26 @@ Angular App Initialization
 
 When I first looked at the code from a year ago, I was surprised it worked at all. Because Angular apps are conventionally started like this:
 
-    <html ng-app="myApp">
+    <html ng-app="feedReaderApp">
         ...
-        <body ng-controller="myAppController">
+        <body ng-controller="RssFeedCtrl">
 
 and then have JavaScript like this:
 
-    angular.module('myApp', [])
-        .controller('myAppController', [function() {}]);
+    angular.module('feedReaderApp', [])
+        .controller('RssFeedCtrl', [function() {}]);
 
 This is a standard so that you can achieve some readable and organized modularity and not completely pollute your global scope. I'm surprised that the original source let me pass a global function in as the Angular controller... that is clearly an anti-pattern.
 
 New Code
 ========
 
-With all that in mind, here's the updated [gist]() for a feed reader with better practices in mind. Demo can be found [here]().
+With all that in mind, here's the updated [gist](https://gist.github.com/davidchang/078d74c3bc68e40dd4a9) for a feed reader with better practices in mind. Demo can be found [here](/misc/feed-reader/v2.html).
+
+I updated to a stabler version of Angular 1.2 and deprecated dependency on jQuery. Note that I think in the current example, I'm using a HackerNews RSS feed where the content of each RSS item is some HTML. Right now, doing {{article.content}} will not render the HTML. If you want to, and you can trust that you won't XSS yourself, you'll have to get around Angular's new 1.2 security stuff by injecting a dependency on ngSanitize in your app (and including that script so it's available):
+
+    angular.module('feedReaderApp', ['ngSanitize'])
+
+and then binding via ng-bind-html
+
+    <div ng-show='article.show' class='content' ng-bind-html="article.content"></div>

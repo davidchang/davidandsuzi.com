@@ -1,8 +1,8 @@
---- 
+---
 title: An Old High School Conversation
-tags: 
+tags:
 - david
-meta: 
+meta:
   _edit_last: "1"
 status: publish
 layout: post
@@ -14,7 +14,7 @@ I was recently reminded of a conversation I had with one of my cross country tea
 
 Six or so years later, I now realize the painful irony of it all.
 
-That reference "I will never leave you nor forsake you" comes from Deuteronomy 31:6 - Moses had led the Israelites out of Egypt, where they were slaves, but everyone was wandering around and complaining that they hadn't gotten to the land that God had promised them and kinda wishing they would die. After a while, Moses gets too old to lead and tells the people that that they should listen to Joshua, their next leader, and that God will still bring them to the land He had promised. Then Moses says, "Be strong and courageous. Do not be afraid or terrified because of them [your enemies], for the Lord your God goes with you; He will never leave you nor forsake you."
+That reference "I will never leave you nor forsake you" comes from Deuteronomy 31:6 - Moses had led the Israelites out of Egypt, where they were slaves, but everyone was wandering around and complaining that they hadn't gotten to the land that God had promised them and kinda wishing they would die. After a while, Moses gets too old to lead and tells the people that that they should listen to Joshua, their next leader, and that God will still bring them to the land He had promised. Then Moses says, "Be strong and courageous. Do not be afraid or terrified because of them \[your enemies\], for the Lord your God goes with you; He will never leave you nor forsake you."
 
 What was this? It was Moses speaking to the people of Israel that God wouldn't leave them or forsake them - that He was going to lead and protect them and stay true to His promise and that ultimately, they were going to be His people and He was still going to be their God. I would think this would be of awesome encouragement to the Israelites.
 

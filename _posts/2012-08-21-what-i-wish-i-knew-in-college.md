@@ -10,7 +10,7 @@ type: post
 published: true
 category: David
 ---
-College was a time of great growth for me spiritually. Here are some things I wish I had known [boomer!] sooner!
+College was a time of great growth for me spiritually. Here are some things I wish I had known \[boomer!\] sooner!
 
 - It is crucial that you get plugged in with community. While people can say that going to church doesn't make you a Christian (and it doesn't), a result of a healthy spiritual walk will mean you're going to be going to church, having community, and surrounding yourself with Godly people, because you understand that the people you hang out with will affect the person you become. The Christian walk literally cannot be done alone.
 - Invest in one campus ministry. My freshman year, I thought I should just do everything and commit to everything, and there were so many campus ministries that I could do a different one every night. While that may sound impressive and zealous, it's simply not sustainable, and I'm doubtful it can yield real, deep relationships. Choose one and put all your eggs in that basket. That might make your decision on where to church easier, since campus ministries are often aligned or partnered with local churches.
