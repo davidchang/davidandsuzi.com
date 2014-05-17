@@ -11,6 +11,10 @@ type: post
 published: true
 category: David
 ---
+**Updated gist**: [https://gist.github.com/davidchang/078d74c3bc68e40dd4a9](https://gist.github.com/davidchang/078d74c3bc68e40dd4a9)
+
+**Updated demo**: [davidandsuzi.com/misc/feed-reader/v2.html](/misc/feed-reader/v2.html)
+
 The first real project I did with Angular was documented a year ago in this [blog post](/building-a-feed-reader-with-angularjs/). It was a really simple app that illustrated the power and potential of Angular, but since I've been working in Angular for the past year, I recently revisited this article and noticed a handful of anti-patterns.
 
 If you don't go back and read that post, I don't blame you. It's long.
@@ -62,14 +66,14 @@ using that darkTheme scope variable.
 Regarding the interval check to manually click the #update button, that should exist in the controller as well, and should utilize the $interval service provided by Angular.
 
 
-$http.get instead of $.ajax
+$http.jsonp instead of $.ajax
 ---------------------------
 
 To make the Google API call, I was using $.ajax. This is interesting, because it is an asynchronous action outside of Angular's "digest cycle" - basically, once it happens, Angular has no idea that anything has changed (this concept will hopefully be eliminated by 2.0 with Object.observe). Since Angular didn't know about it, $scope.updateModel had to manually call $scope.$apply to trigger the digest.
 
-But if we use $http.get (these Angular services typically wrap everything in $scope.$apply themselves), we won't need to manually call $apply ourselves. And unit testing will be easier, if we were going to write unit tests (for the same testability reasons, we would want to use $interval above instead of the native setInterval).
+But if we use $http.jsonp (these Angular services typically wrap everything in $scope.$apply themselves), we won't need to manually call $apply ourselves. And unit testing will be easier, if we were going to write unit tests (for the same testability reasons, we would want to use $interval above instead of the native setInterval).
 
-By the way, we'd probably want to move that Google API call into its own service, but that's a bit of overkill right now. But the main idea is that controllers themselves should be pretty thin, and recurring logic/code can typically be abstracted out elsewhere, into a service or parent controller.
+By the way, we'd probably want to move that Google API call into its own service, but that's a bit of overkill right now. But the main idea is that controllers themselves should be pretty thin (the final gist isn't a good example of this), and recurring logic/code can typically be abstracted out elsewhere, into a service or parent controller.
 
 
 Angular expressions
@@ -107,7 +111,9 @@ New Code
 
 With all that in mind, here's the updated [gist](https://gist.github.com/davidchang/078d74c3bc68e40dd4a9) for a feed reader with better practices in mind. Demo can be found [here](/misc/feed-reader/v2.html).
 
-I updated to a stabler version of Angular 1.2 and deprecated dependency on jQuery. Note that I think in the current example, I'm using a HackerNews RSS feed where the content of each RSS item is some HTML. Right now, doing {{article.content}} will not render the HTML. If you want to, and you can trust that you won't XSS yourself, you'll have to get around Angular's new 1.2 security stuff by injecting a dependency on ngSanitize in your app (and including that script so it's available):
+I made all of the improvements above and updated to a stabler version of Angular 1.2/deprecated dependency on jQuery.
+
+In the current example, I'm using a HackerNews RSS feed where the content of each RSS item is some HTML. Right now, doing {{article.content}} will not render the HTML. If you want to, and you can trust that you won't XSS yourself, you'll have to get around Angular's new 1.2 security stuff by injecting a dependency on ngSanitize in your app (and including that script so it's available):
 
     angular.module('feedReaderApp', ['ngSanitize'])
 
