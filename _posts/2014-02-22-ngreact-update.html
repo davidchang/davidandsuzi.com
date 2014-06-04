@@ -12,16 +12,6 @@ type: post
 published: true
 category: David
 ---
-<style>
-.img {
-    border: 2px solid gray;
-    padding: 10px;
-}
-.intro {
-  border-bottom: 1px solid #EEE;
-  padding-bottom: 15px;
-}
-</style>
 
 <section class="intro">
 <div>Github: <a href="https://github.com/davidchang/ngReact">https://github.com/davidchang/ngReact</a></div>
@@ -34,7 +24,7 @@ category: David
 React 0.9 just launched this past week and Pete Hunt opened a Github issue (<a href="https://github.com/davidchang/ngReact/issues/2#issuecomment-35528362">https://github.com/davidchang/ngReact/issues/2#issuecomment-35528362</a>) against me to re-run my benchmark as they suspected I would find a big boost in performance. And I did - I saw a 33% increase just by updating my bower.json, dropping from 803ms to 542ms.
 </p>
 
-<a href="../imgs/ngReactUpdate/afterUpgrading.png"><img class='img' src="../imgs/ngReactUpdate/afterUpgrading.png"/></a>
+<a href="../imgs/ngReactUpdate/afterUpgrading.png"><img src="../imgs/ngReactUpdate/afterUpgrading.png"/></a>
 
 </p>
 <p>
@@ -133,7 +123,7 @@ and turned it into this single line:
 return scope.$eval(attrs['ng-bind'], { scope.alias : data });
 </pre>
 
-<a href="../imgs/ngReactUpdate/valueEval.png"><img class='img' src="../imgs/ngReactUpdate/valueEval.png"/></a>
+<a href="../imgs/ngReactUpdate/valueEval.png"><img src="../imgs/ngReactUpdate/valueEval.png"/></a>
 
 <p>
 All of a sudden… 12.5 seconds down to 5.28. 57% faster.
@@ -169,7 +159,7 @@ attrs.onClick = function() {
 };
 </pre>
 
-<a href="../imgs/ngReactUpdate/clickEval.png"><img class='img' src="../imgs/ngReactUpdate/clickEval.png"/></a>
+<a href="../imgs/ngReactUpdate/clickEval.png"><img src="../imgs/ngReactUpdate/clickEval.png"/></a>
 
 <p>
 5.28 down to 3.01... that's another 43% improvement. And if you remember the original Angular ng-repeat performance, that came out as 2.45 seconds. So we're almost at native Angular performance in a case where we're actually transcluding and dynamically parsing out all of the elements into React components.
@@ -184,7 +174,7 @@ But this isn't entirely too fair to Angular. Another thing I learned was that ng
 But "track by" exists, so you can do stuff like ng-repeat="row in data track by $index" and Angular will be able to get significantly smarter about the way they do DOM manipulation. Adding track by to that normal, native ng-repeat results in a pretty stunning improvement (as of Angular 1.2.14):
 </p>
 
-<a href="../imgs/ngReactUpdate/withTrackBy.png"><img class='img' src="../imgs/ngReactUpdate/withTrackBy.png"/></a>
+<a href="../imgs/ngReactUpdate/withTrackBy.png"><img src="../imgs/ngReactUpdate/withTrackBy.png"/></a>
 
 <p>
 That's 400 milliseconds. Compared to 2.45 seconds without "track by". So… umm.. 84% faster. So if you're wondering if you should use track by, the answer is Yes.

@@ -12,18 +12,6 @@ type: post
 published: true
 category: David
 ---
-<style>
-.img {
-    border: 2px solid gray;
-    padding: 10px;
-    opacity: 0.7;
-}
-.intro {
-	border-bottom: 1px solid #EEE;
-	padding-bottom: 15px;
-}
-</style>
-
 <section class="intro">
 <div>Github: <a href="https://github.com/davidchang/ngReact">https://github.com/davidchang/ngReact</a></div>
 <div>Annotated source using Docco: <a href="http://davidchang.github.io/ngReact/docs/ngReact.html">http://davidchang.github.io/ngReact/docs/ngReact.html</a></div>
@@ -82,7 +70,7 @@ for(var i = 0; i < 500; ++i) {
 Rendering this takes 2.45 seconds for 10 iterations, hovering between 250 and 315 milliseconds for each data reload. The initial load is presumably the fastest because there are no nodes to delete - everything is new:
 </p>
 
-<a href="../imgs/ngReact-normal.png"><img class='img' src="../imgs/ngReact-normal.png"/></a>
+<a href="../imgs/ngReact-normal.png"><img src="../imgs/ngReact-normal.png"/></a>
 
 <p>
 I implemented two solutions via React, both initiated, called, and maintained from respective Angular directives. The first is called ngReactComponent, and allows you to write your React component explicitly. Your HTML would look like this:
@@ -133,7 +121,7 @@ window.Repeater = React.createClass({
 Rendering this takes 803ms for 10 iterations, hovering around 35 and 55ms for each data reload (that's 67% faster). You'll notice that the first load takes a little longer than successive loads, and the second load REALLY struggles - here, it's 433ms, which is more than half of the total time!
 </p>
 
-<a href="../imgs/ngReact-react.png"><img class='img' src="../imgs/ngReact-react.png"/></a>
+<a href="../imgs/ngReact-react.png"><img src="../imgs/ngReact-react.png"/></a>
 
 <p>
 The second way I came up with using React is called ngReactRepeat and it uses transclusion so that you don't have to explicitly declare your React Component. You just attach the directive on and it creates React components out of your markup. So your HTML still looks basically the same as the first example in pure Angular:
@@ -156,7 +144,7 @@ The second way I came up with using React is called ngReactRepeat and it uses tr
 Rendering this takes... 13.4s for 10 iterations, around 1.25s for each data reload. Ouch. That's almost 450% slower. I'm not sure if I'm doing something wrong and losing the React magic, but this is unmistakably TERRIBLE:
 <p>
 
-<a href="../imgs/ngReact-react.png"><img class='img' src="../imgs/ngReact-react-transclude.png"/></a>
+<a href="../imgs/ngReact-react.png"><img src="../imgs/ngReact-react-transclude.png"/></a>
 
 <p>
 Let's go back to that first solution, though - it's actually pretty nifty! If we can figure out if that second reload can be reduced, we'd be looking at a pretty solid solution. ngReactComponent is written so that it is a bit abstract and could potentially be used as the entry point for any React component, but I wrote it specifically with ng-repeat in mind, so it might not be the most generalized.
