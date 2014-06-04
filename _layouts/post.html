@@ -1,67 +1,20 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>David and Suzi | {{page.title}}</title>
-      <meta name="viewport" content="width=device-width">
+{% include header.html %}
 
-      <meta property="og:title" content="{{page.title}}"/>
-      {% if page.description %}
-          <meta property="og:description" content="{{page.description}}"/>
-      {% else %}
-          <meta property="og:description" content="{{site.description}}"/>
-      {% endif %}
-      <meta property="og:type" content="website"/>
-      <meta property="og:url" content="http://davidandsuzi.com{{page.url}}"/>
+	<section role="main">
+		<article role="article">
 
-      <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+			<header class="centered">
+				<h1>{{ page.title }}</h1>
+				<div>Written by
+					<span>{{ page.category }}</span> on {{ page.date | date: "%b %d, %Y" }}
+				</div>
+			</header>
 
-  		<!--[if lt IE 9]>
-  			<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-  			<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
-  		<![endif]-->
-  		<link href="../styles/style.css" rel="stylesheet">
-    </head>
+			<section>
+				{{ content }}
+			</section>
 
-    <body>
+		</article> <!-- end article -->
+	</section>
 
-      <div id="page-container">
-        <header role="banner">
-          <h1><a href="http://davidandsuzi.com"><span class="highlight">david</span> and <span class="highlight">suzi</span></a></h1>
-    		</header>
-
-    		<section role="main">
-    			<article role="article">
-
-    				<header class="centered">
-    					<h1>{{ page.title }}</h1>
-    					<div>Written by
-    						<span>{{ page.category }}</span> on {{ page.date | date: "%b %d, %Y" }}
-    					</div>
-    				</header>
-
-    				<section>
-    					{{ content }}
-    				</section>
-
-    			</article> <!-- end article -->
-    		</section>
-
-        <footer>
-          In this is love, not that we have loved God but that he loved us.
-        </footer>
-      </div>
-
-      <script>
-        var _gaq=[['_setAccount','UA-35626315-1'],['_trackPageview']];
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-      </script>
-
-    </body>
-</html>
+{% include footer.html %}

@@ -742,7 +742,7 @@ ul, ol {
 
 article[role=article] header {
 	border-bottom: 1px solid #EEE;
-	margin-bottom: 30px;
+	margin-bottom: 25px;
 	padding-bottom: 20px;
 }
 
@@ -755,7 +755,8 @@ img {
 
 .intro {
   border-bottom: 1px solid #EEE;
-  padding-bottom: 15px;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
 }
 
 .praise-night-ul {

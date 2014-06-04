@@ -1,44 +1,7 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>David and Suzi</title>
-      <meta name="description" content="Writings from David and Suzi Chang. A story of redemption and faith.">
-      <meta name="viewport" content="width=device-width">
+{% include header.html %}
 
-      <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<section class="centered index-list" role="main">
+    {{ content }}
+	</section>
 
-  		<!--[if lt IE 9]>
-  			<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-  			<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
-  		<![endif]-->
-  		<link href="../styles/style.css" rel="stylesheet">
-    </head>
-    <body>
-
-      <div id="page-container">
-        <header role="banner">
-          <h1><a href="http://davidandsuzi.com"><span class="highlight">david</span> and <span class="highlight">suzi</span></a></h1>
-        </header>
-
-  			<section class="centered index-list" role="main">
-          {{ content }}
-    		</section>
-
-        <footer>
-          In this is love, not that we have loved God but that he loved us.
-        </footer>
-      </div>
-
-      <script>
-        var _gaq=[['_setAccount','UA-35626315-1'],['_trackPageview']];
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-      </script>
-    </body>
-</html>
+{% include footer.html %}
