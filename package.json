@@ -1,0 +1,18 @@
+{
+  "name": "davidandsuzi.com",
+  "homepage": "http://davidandsuzi.com",
+  "version": "0.0.1",
+  "description": "Jekyll setup for davidandsuzi.com",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:davidchang/davidandsuzi.git"
+  },
+  "author": {
+    "name": "David Chang"
+  },
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "load-grunt-tasks": "~0.3.0"
+  }
+}
