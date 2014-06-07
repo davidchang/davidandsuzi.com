@@ -14,5 +14,8 @@
     "grunt": "~0.4.1",
     "grunt-contrib-cssmin": "~0.6.1",
     "load-grunt-tasks": "~0.3.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-imagemin": "^0.7.1"
   }
 }

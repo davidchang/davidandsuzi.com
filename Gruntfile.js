@@ -17,8 +17,19 @@ module.exports = function(grunt) {
           'styles/styles.min.css' : ['styles/bootstrap.css', 'styles/styles.css']
         }
       }
+    },
+
+    imagemin : {
+      dynamic: {
+        files: [{
+          expand: true,
+          cwd: 'imgs/uncompressed/',
+          src: ['**/*.{png,jpg,gif}'],
+          dest: 'imgs/'
+        }]
+      }
     }
   });
 
-  grunt.registerTask('default', ['cssmin']);
+  grunt.registerTask('default', ['cssmin', 'imagemin']);
 };
