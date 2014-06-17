@@ -72,7 +72,7 @@ So I’ll just take that new template code and throw it into that render functio
     React.renderComponent(<Youtube code="IytNBm8WA1c" />, document.body);
 
 
-Seems pretty straightforward. That code attribute passed in shows up in the iframe src, but the [jsfiddle](http://jsfiddle.net/b4m4Z/) fails for some reason.
+Seems pretty straightforward. That code attribute passed in shows up in the iframe src, but the jsfiddle [http://jsfiddle.net/b4m4Z/](http://jsfiddle.net/b4m4Z/) fails for some reason.
 
 "Uncaught Error: Invariant Violation: The 'style' prop expects a mapping from style properties to values, not a string.”
 
@@ -135,7 +135,7 @@ So the markup can be cleaned up to remove CSS and introduce some much-needed spa
 
     React.renderComponent(<Youtube code="IytNBm8WA1c" />, document.body);
 
-JSFiddle is [here](http://jsfiddle.net/3sF8w/) with the complementary CSS. You’ll notice that a bunch of those iframe attributes got cleaned up, and that’s actually one very cool thing about React - I realized I was getting a bunch of console warnings asking me if I meant to use frameBorder or allowFullScreen or className over frame border and allowfullscreen and class.
+Here's the JSFiddle [http://jsfiddle.net/3sF8w/](http://jsfiddle.net/3sF8w/) with the complementary CSS. You’ll notice that a bunch of those iframe attributes got cleaned up, and that’s actually one very cool thing about React - I realized I was getting a bunch of console warnings asking me if I meant to use frameBorder or allowFullScreen or className over frame border and allowfullscreen and class.
 
 <hr>
 
