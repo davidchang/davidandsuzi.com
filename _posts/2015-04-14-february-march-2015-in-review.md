@@ -1,6 +1,6 @@
 ---
 title: February/March 2015 In Review
-description:
+description: As I thought back about the last two months, the most cohesive theme has been one of believing in and working towards something not yet here, not fully realized. It’s like flying blind, like trusting that what you’re doing is right, and that by the time you get there, you’ll be able to see everything converge.
 tags:
 - david
 meta:
