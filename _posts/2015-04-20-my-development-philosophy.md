@@ -3,6 +3,7 @@ title: My Development Philosophy
 description: I think I'm at the point in my life where I just want to build stuff and deliver. I don't care about clever optimizations right now or overengineering for unseen scale (though I'm also not saying to hack everything together). The more I read about other JS frameworks or technologies, the more I get distracted and stop doing tangible work. So I'm going to sit down with my React-Reflux-superagent-Hapi stack and build stuff, and I think they're all good enough that they won't seriously get in the way of whatever I'm building.
 tags:
 - david
+- code
 meta:
   _edit_last: "1"
 status: publish
