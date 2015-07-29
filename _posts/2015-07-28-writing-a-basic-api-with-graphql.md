@@ -1,5 +1,5 @@
 ---
-title: Writing a Basic Backend with GraphQL
+title: Writing a Basic API with GraphQL
 description: GraphQL is still in its infancy in terms of documentation and ecosystem, but what we have seen so far from conference talks and in the released specification boast predictability, simplicity, and flexibility. My experience with it for this article confirms these claims and proves to be a delightful experience, but what excites me even more is the idea of using this sort of backend in conjunction with Relay. I am optimistic that these sort of libraries will free me from a usually monolithic and rigid backend and meticulous data wiring on the front end.
 tags:
 - david
