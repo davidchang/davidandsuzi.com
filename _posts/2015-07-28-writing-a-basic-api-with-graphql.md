@@ -55,7 +55,7 @@ Let's start with the Pokemon list endpoint. We’re still using the list from th
       GraphQLObjectType,
       GraphQLInt,
       GraphQLString,
-    } from 'graphql/lib/type';
+    } from 'graphql';
 
     let PokemonType = new GraphQLObjectType({
       name: 'Pokemon',
@@ -84,7 +84,7 @@ The name, type, and species are all Strings (though type and species could be en
 
 In order to be able to access Pokemon through our GraphQL API, we need to define a root query in our GraphQLSchema. A standard, empty schema looks like this:
 
-    import { GraphQLSchema } from 'graphql/lib/type';
+    import { GraphQLSchema } from 'graphql';
 
     let schema = new GraphQLSchema({
       query: new GraphQLObjectType({
