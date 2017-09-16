@@ -27,11 +27,13 @@ Code: [https://github.com/davidchang/redux-pokedex](https://github.com/davidchan
 
 To start, I’ll clone the TodoMVC example in Redux:
 
-    git clone https://github.com/gaearon/redux.git
-    cd redux/examples/todomvc
-    npm install
-    npm start
-    open http://localhost:3000
+```shell
+git clone https://github.com/gaearon/redux.git
+cd redux/examples/todomvc
+npm install
+npm start
+open http://localhost:3000
+```
 
 That provides us with a webpack-dev-server that transpiles JS with Babel and hot reloads. This is a pretty solid boilerplate for any app.
 
@@ -41,39 +43,45 @@ I copied a list of the original 151 Pokemon from [here](https://gist.github.com/
 
 My initial state will look something like this:
 
-    const initialStore = {
-      pokemon : PokemonList,
-      searchTerm : ‘',
-      caughtPokemon : []
-    };
+```javascript
+const initialStore = {
+  pokemon : PokemonList,
+  searchTerm : ‘',
+  caughtPokemon : [],
+};
+```
 
 `searchTerm`, here, represents an input field where we can narrow down the list of Pokemon. Let’s write the actionHandler that corresponds to whenever the SEARCH_INPUT_CHANGED action is fired. When that happens, we'll want to respond with a new object that updates searchTerm and the list of pokemon to display. In a traditional Flux store, we’d just mutate an internal state:
 
-    export default function pokemon(state = initialState, action) {
-      switch (action.type) {
-      case SEARCH_INPUT_CHANGED:
-        this.searchTerm = action.searchTerm;
-        this.pokemon = someFilteringMethod();
-        this.trigger();
-      default:
-        return state;
-      }
-    }
+```javascript
+export default function pokemon(state = initialState, action) {
+  switch (action.type) {
+  case SEARCH_INPUT_CHANGED:
+    this.searchTerm = action.searchTerm;
+    this.pokemon = someFilteringMethod();
+    this.trigger();
+  default:
+    return state;
+  }
+}
+```
 
 but since stores need to be stateless in Redux, we need to think differently (more functionally) and make sure to create a new state object upon every action instead of modifying the previous state object:
 
-    export default function pokemon(state = initialState, action) {
-      switch (action.type) {
-      case SEARCH_INPUT_CHANGED:
-        return {
-          ...state,
-          searchTerm : action.searchTerm,
-          pokemon : someFilteringMethod()
-        };
-      default:
-        return state;
-      }
-    }
+```javascript
+export default function pokemon(state = initialState, action) {
+  switch (action.type) {
+  case SEARCH_INPUT_CHANGED:
+    return {
+      ...state,
+      searchTerm : action.searchTerm,
+      pokemon : someFilteringMethod()
+    };
+  default:
+    return state;
+  }
+}
+```
 
 This sort of object manipulation is not how I normally think in JavaScript, which is an argument to me to consider using ImmutableJS, since that would also have the same sort of overhead in needing to learn a new API. Look for that in a future writeup.
 
@@ -81,12 +89,14 @@ This sort of object manipulation is not how I normally think in JavaScript, whic
 
 Let’s talk about the action creator that will trigger the action handler we just wrote. The whole thing looks like this:
 
-    export function searchTermChanged(searchTerm) {
-      return {
-        type: types.SEARCH_INPUT_CHANGED,
-        searchTerm
-      };
-    }
+```javascript
+export function searchTermChanged(searchTerm) {
+  return {
+    type: types.SEARCH_INPUT_CHANGED,
+    searchTerm
+  };
+}
+```
 
 Pretty straightforward, though note that it’s using an ES6 object shorthand property to pass the searchTerm parameter as the value of the searchTerm key. This action creator will get invoked by the view - specifically, by the onChange handler on an input field. You'll notice that all this does is return an object and it does not actually dispatch anything - we will discuss how the interaction occurs in this next section.
 
@@ -96,54 +106,58 @@ The last piece of the puzzle is the view and how it receives data from the store
 
 App.js looks like this:
 
-    import React, { Component } from 'react';
-    import PokedexApp from './PokedexApp';
-    import { createRedux } from 'redux';
-    import { Provider } from 'redux/react';
-    import * as stores from '../stores';
+```javascript
+import React, { Component } from 'react';
+import PokedexApp from './PokedexApp';
+import { createRedux } from 'redux';
+import { Provider } from 'redux/react';
+import * as stores from '../stores';
 
-    const redux = createRedux(stores);
+const redux = createRedux(stores);
 
-    export default class App extends Component {
-      render() {
-        return (
-          <Provider redux={redux}>
-            {() => <PokedexApp />}
-          </Provider>
-        );
-      }
-    }
+export default class App extends Component {
+  render() {
+    return (
+      <Provider redux={redux}>
+        {() => <PokedexApp />}
+      </Provider>
+    );
+  }
+}
+```
 
 The Provider is used to expose the Redux instance (the result of `createRedux(stores)`) on the context, where it can be accessed from any of its children. The Redux instance is the glue that enables the connection of the dispatcher to stores and manages the state of the stores (since stores are stateless, pure functions).
 
 The line `{() => <PokedexApp />}` declares a function that is passed to Provider as props.children and is invoked in the Provider’s render function. I have no idea why this is written this way or if it is necessary to be written this way, but this same sort of pattern is used again in the Connector component in PokedexApp. PokedexApp looks like this:
 
-    import React, { Component } from 'react';
-    import { bindActionCreators } from 'redux';
-    import { Connector } from 'redux/react';
-    import MainSection from '../components/MainSection';
-    import * as PokemonActions from '../actions/PokemonActions';
+```javascript
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { Connector } from 'redux/react';
+import MainSection from '../components/MainSection';
+import * as PokemonActions from '../actions/PokemonActions';
 
-    export default class PokedexApp extends Component {
-      render() {
-        return (
-          <Connector select={state => ({ pokemonStore : state.pokemon })}>
-            {this.renderChild}
-          </Connector>
-        );
-      }
+export default class PokedexApp extends Component {
+  render() {
+    return (
+      <Connector select={state => ({ pokemonStore : state.pokemon })}>
+        {this.renderChild}
+      </Connector>
+    );
+  }
 
-      renderChild({ pokemonStore, dispatch }) {
-        const actions = bindActionCreators(PokemonActions, dispatch);
-        return (
-          <div>
-            <MainSection data={pokemonStore} actions={actions} />
-          </div>
-        );
-      }
-    }
+  renderChild({ pokemonStore, dispatch }) {
+    const actions = bindActionCreators(PokemonActions, dispatch);
+    return (
+      <div>
+        <MainSection data={pokemonStore} actions={actions} />
+      </div>
+    );
+  }
+}
+```
 
-There are two new concepts here - Connector and bindActionCreators.
+There are two new concepts here - `Connector` and `bindActionCreators`.
 
 The Connector component uses the Redux instance that we set earlier in our context in the parent component. It ties the entire flow between actions and stores together. This happens in two ways - first, changes in the state of the store automatically propagate down to the view and second, views receive access to a dispatch function that can communicate to the stores.
 
