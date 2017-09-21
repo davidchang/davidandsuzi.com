@@ -1,0 +1,74 @@
+#page-container {
+  max-width: 680px;
+  width: 90%;
+  margin: 0 auto 25px;
+}
+
+header[role=banner] {
+  text-align: center;
+}
+header[role=banner] a:hover {
+  text-decoration: none;
+}
+header[role=banner] span {
+  font-weight: bold;
+}
+
+ul, ol {
+  padding-left: 20px;
+}
+
+.no-points {
+  padding-left: 0px;
+}
+.no-points li {
+  list-style-type: none;
+}
+
+.centered {
+  text-align: center;
+}
+
+.index-list h4 {
+  line-height: 1.3;
+}
+.index-list h3 {
+  margin-top: 30px;
+}
+
+article[role=article] header {
+  border-bottom: 1px solid #EEE;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+}
+
+img {
+  border: 1px solid gray;
+  max-width: 100%;
+  height: auto;
+  margin: 15px auto;
+}
+
+.intro {
+  border-bottom: 1px solid #EEE;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+}
+
+.praise-night-ul {
+    margin: 0px;
+}
+.praise-night-ul li p:first-child {
+    font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  margin-top: 50px;
+  border-top: 1px solid #EEE;
+  padding-top: 15px;
+}
+
+#disqus_thread {
+  margin-top: 50px;
+}

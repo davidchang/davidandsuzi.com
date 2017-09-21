@@ -34,11 +34,13 @@ All we really need is the following for each user:
 
 The final project is hosted on Firebase and weighs in at about 200 lines of JSX prior to styling.
 
-Demo: [https://yo-in-react.firebaseapp.com](https://yo-in-react.firebaseapp.com)
+<div>Demo: <a href="https://yo-in-react.firebaseapp.com">https://yo-in-react.firebaseapp.com</a></div>
 
-Github: [https://github.com/davidchang/yo-in-react](https://github.com/davidchang/yo-in-react)
+<div></div>
 
-![Yo in React screenshot]({{ site.url }}/imgs/yo-in-react.png)
+<div>Github: <a href="https://github.com/davidchang/yo-in-react">https://github.com/davidchang/yo-in-react</a></div>
+
+<div><img src="../imgs/yo-in-react.png"></img></div>
 
 First, React is component based. So we can have a single App component, composed of smaller components for each Yo feature:
 

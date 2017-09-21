@@ -1,0 +1,28 @@
+        <div id="disqus_thread"></div>
+
+        <footer>
+          In this is love, not that we have loved God but that he loved us.
+        </footer>
+      </div>
+
+      <script>
+        var _gaq=[['_setAccount','UA-35626315-1'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+
+      {% if page.type == "post" %}
+      <script>
+        var disqus_shortname = 'davidandsuzi';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      {% endif %}
+
+    </body>
+</html>
