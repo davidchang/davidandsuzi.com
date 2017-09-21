@@ -1,3 +1,9 @@
 permalink: /:title/
 description: "Writings from David and Suzi Chang. A story of redemption and faith."
-exclude: ['imgs/uncompressed']
+theme: jekyll-whiteglass
+
+plugins:
+  - jekyll-sitemap
+
+google_analytics: UA-35626315-1
+comments: true
