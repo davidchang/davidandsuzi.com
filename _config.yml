@@ -1,9 +1,8 @@
 permalink: /:title/
 description: "Writings from David and Suzi Chang. A story of redemption and faith."
-theme: jekyll-whiteglass
-
-plugins:
-  - jekyll-sitemap
 
 google_analytics: UA-35626315-1
 comments: true
+
+twitter_username: davidchizzle
+twitter_image: https://pbs.twimg.com/profile_images/535137081693970432/3oGBgOqS_400x400.jpeg
