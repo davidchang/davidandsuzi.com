@@ -14,7 +14,7 @@ We are currently living in South Seattle and worshiping at [Chinese Southern Bap
 
 David tweets as [@davidchizzle](https://twitter.com/davidchizzle), codes on Github as [davidchang](https://github.com/davidchang), has a [Facebook](https://www.facebook.com/dchang.me), and puts career related things on [LinkedIn](https://www.linkedin.com/in/davidchizzle/). He got his start with content publishing in high school on Xanga, but that is far too embarrassing to link here. You can email him at dchang.me@gmail.com.
 
-He currently works as a front end engineer at Facebook; past companies include TUNE and Amazon.
+He currently works as a front end engineer at Airbnb; past companies include Facebook, TUNE, and Amazon.
 
 Technologies he enjoys:
 
@@ -25,7 +25,8 @@ Technologies he enjoys:
 
 Some things he's done:
 
-- working on Facebook's web-based [TV Apps](https://videoapp.fb.com/)
+- working on internal service tools for Airbnb's trust and safety agents
+- developed Facebook's web-based [TV Apps](https://videoapp.fb.com/)
 - presented this [meetup talk](https://youtu.be/-qFNutsy66o?t=11m41s) at SeattleJS about optimizing React/Redux apps
 - developed the [TUNE marketing console](https://www.tune.com/solutions/tune-marketing-console/)
 - came up with [ngReact](https://github.com/ngReact/ngReact), a library to render React components within Angular apps (2k+ stars on Github)
