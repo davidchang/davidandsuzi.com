@@ -13,15 +13,21 @@ published: true
 category: David
 ---
 
+**This article is outdated and has since been updated to 2018 technologies in [davidandsuzi.com/writing-a-basic-react-redux-app-in-2018](/writing-a-basic-react-redux-app-in-2018)**
+
 I’ve been a bit heads down for the last two months, working on a project with React 0.12.2 and Reflux. In that course of time, the React ecosystem has begun to feel foreign to me. React is up to 0.14 beta, React-Router is up to 1.0 beta, a few ES6 and ES7 patterns have been popularized, and Redux has gained a large amount of support and momentum and arguably emerged as the Flux library of choice.
 
 I’ve been wanting to look at Redux for a while, but the only way I can motivate myself to learn stuff like this is by doing write ups. So let’s build a simple Pokedex app that displays a list of Pokemon, has a search input field, and lets you click a button to catch some Pokemon. That’s it, intentionally contrived. Everything will be synchronous for now, but I’d ambitiously like to do writeups in the future that introduce the capabilities/usage of Redux Dev Tools, ImmutableJS, GraphQL, and server-side rendering.
 
 \[This article is being written specifically for those who have prior experience with React and Flux, but have not had any prior experience with Redux.\]
 
-Demo: [http://davidchang.github.io/redux-pokedex/](http://davidchang.github.io/redux-pokedex/)
+Demo was at http://davidchang.github.io/redux-pokedex/](http://davidchang.github.io/redux-pokedex/), but is now no longer available
 
-Code: [https://github.com/davidchang/redux-pokedex](https://github.com/davidchang/redux-pokedex)
+Code: [https://github.com/davidchang/redux-pokedex](https://github.com/davidchang/redux-pokedex/tree/4dd6ea527629ac18573028d510cca0b1827c02e8)
+
+Screenshot:
+
+![Pokedex app](/imgs/writing-a-basic-app-in-redux/2015pokedex.png "Pokedex App")
 
 ### Starting
 
