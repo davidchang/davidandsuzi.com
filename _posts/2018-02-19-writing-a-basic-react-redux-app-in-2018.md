@@ -1,6 +1,6 @@
 ---
 title: Writing a Basic React-Redux App in 2018
-description:
+description: This is a revision of an article I first wrote in 2015 about writing a basic Redux application, back when React was at version 0.13.3 and Redux at 1.0.0. Now, React is at 16.2 and Redux at 3.7.2. React now abstracted out the renderer into React-DOM, has functional components, and support for Fragments.
 tags:
 - david
 - code
@@ -141,6 +141,7 @@ export default connect(store => store, actions)(App);
 
 The connect returns a new component, where store and actions are available to `App` as props. We can make App into a stateless functional component, since we don't need any internal component state or any lifecycle methods. So the App component will end up looking like this:
 
+{% raw %}
 ```
 function App({
   caughtPokemon,
@@ -203,5 +204,6 @@ function App({
   );
 }
 ```
+{% endraw %}
 
 With create-react-app, we could have had `yarn start` running the whole time to have hot reloading on to see our progress. This is sufficient for a basic Redux app, but obviously things get more complicated as we scale our app. We haven't much talked about the benefits of Reselect or dev tooling or how to handle asynchronous actions. We also haven't touched on alternative ways to handle state management, but this is a sufficient introduction.
