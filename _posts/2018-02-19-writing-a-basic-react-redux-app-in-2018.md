@@ -21,11 +21,11 @@ Screenshot:
 
 ![Pokedex app](/imgs/writing-a-basic-app-in-redux/2018pokedex.png "Pokedex App")
 
-This is a revision of an article I wrote in 2015 about writing a basic Redux application. I’ve used Redux in production at Facebook and Airbnb since then, and Redux itself has matured a fair bit and established itself as the standard state management library for React, so it deserves an update. It’s worth noting, though, that while Redux is the most popular, contenders have arisen, such as MobX, the upcoming, stable context API, and even Dan Abramov (Redux’s creator) saying “you might not need Redux”, implying that you could just utilize React’s component state or even singletons with event emitters.
+This is a revision of an [article](/writing-a-basic-app-in-redux) I first wrote in 2015 about writing a basic Redux application, back when React was at version 0.13.3 and Redux at 1.0.0. Now, React is at 16.2 and Redux at 3.7.2. React now abstracted out the renderer into React-DOM, has functional components, and support for Fragments.
+
+I’ve used both React and Redux in production at Facebook and Airbnb since then, and Redux itself has matured a fair bit and established itself as the standard state management library for React, so it warrants an update. It’s worth noting, though, that while Redux is the most popular, contenders have arisen, such as MobX, the upcoming and now stable context API, normal React component state or POJOs. Redux's creator Dan Abramov famously wrote "you might not need Redux," indicating that plenty of other solutions are available and Redux itself is not a panacea.
 
 \[Disclaimer: this Pokedex app is a rather contrived example, one where using React component state would be perfectly fine, but the idea was to make a simple Redux app. In the 2015 article, I tried to establish some good patterns - creating actions, reducers, constants, containers, and components directories. I think that was a bit over the top, so this will be a much more minimalistic Redux app, intended to show the flow and basic consumption of Redux.\]
-
-Back in the 2015 article, React was at version 0.13.3 and Redux at 1.0.0. Now, React is at 16.2 and Redux at 3.7.2. React now abstracted out the renderer into React-DOM, has functional components, and support for Fragments.
 
 Create-react-app came out in 2016 from a Facebook hackathon and was instantly well received by the community, becoming a simple zero-configuration default to getting started with React apps, filling a huge need in the community for a simple way to get started. This sets up and hides a bunch of things like Webpack and Babel configurations so that you can write ES20xx and get hot reloading for free (in 2015, the best thing I could do was clone a Redux example repo and change everything).
 
