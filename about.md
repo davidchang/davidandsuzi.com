@@ -8,7 +8,9 @@ permalink: /about/
 
 ## David and Suzi
 
-We are currently living in South Seattle and worshiping at [Chinese Southern Baptist Church](http://csbcseattle.org/english/) in the International District. We just celebrated our five year anniversary. Throughout the week, you'll find us hanging out at home with our friends, working out, and being a part of our church community. A good weekend consists of a productive morning, brunch somewhere like the [London Plane](http://www.thelondonplaneseattle.com/home) or the [Barking Frog](https://www.willowslodge.com/barking_frog/), walking around the city, and a coffeeshop like [Ada's](http://www.seattletechnicalbooks.com/) or [Caffe Vita](http://www.caffevita.com/).
+We are currently living in South Seattle. We just celebrated our five year anniversary. Throughout the week, you'll find us hanging out at home with our friends, working out, and being a part of our church community. A good weekend consists of a productive morning, brunch somewhere like the [London Plane](http://www.thelondonplaneseattle.com/home) or the [Barking Frog](https://www.willowslodge.com/barking_frog/), walking around the city, and a coffeeshop like [Ada's](http://www.seattletechnicalbooks.com/) or [Caffe Vita](http://www.caffevita.com/).
+
+In mid-2018, we welcomed our first daughter into the family. So now we spend a lot of time hanging out with her and introducing her to new things, and I drink about twice as much coffee as before. I briefly considered buying davidandsuzi.family.
 
 ## David
 

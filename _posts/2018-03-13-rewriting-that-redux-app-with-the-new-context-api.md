@@ -13,7 +13,7 @@ published: true
 category: David
 ---
 
-Demo: http://davidchang.github.io/redux-pokedex/](http://davidchang.github.io/redux-pokedex/)
+Demo: [http://davidchang.github.io/redux-pokedex/](http://davidchang.github.io/redux-pokedex/)
 
 React state: [Code diff](https://github.com/davidchang/redux-pokedex/commit/69da59a5b7a3d161a0cde92aeac30e4342f25553) and [Periscope livestream](https://www.periscope.tv/davidchizzle/1yNGakEpzrNxj)
 
