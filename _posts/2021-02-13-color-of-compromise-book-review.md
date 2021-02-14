@@ -1,6 +1,6 @@
 ---
 title: The Color of Compromise - Book Review
-description:
+description: I spent the vast majority of my life not thinking too much about race or politics, but over the last few years, I've realized that focusing on individual change or development can only do so much. Institutions and policies are another huge piece of the puzzle that determine who has access to justice and loving your neighbor means not just befriending them and giving them your time and ear, but standing up for them when a larger system is working against them.
 tags:
   - david
 meta:
