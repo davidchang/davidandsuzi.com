@@ -57,14 +57,14 @@ I used a tool called `SQLPro for Postgres` (and even started a monthly subscript
 
 There were 2 main ways I needed to massage my data:
 
-PG exports my dates as ISO strings, but Prisma wants to save into SQLite with milliseconds after the epoch. So I had to switch all of my timestamps to milliseconds after the epoch. For that, I actually asked Github Copilot Chat to make a Node script for me that would read all the rows from a database table and then update them, and with some tweaks, the script worked really nicely
-PG exports booleans as `“True”` and `“False”`, but SQLite wanted `true` and `false`
+- PG exports my dates as ISO strings, but Prisma wants to save into SQLite with milliseconds after the epoch. So I had to switch all of my timestamps to milliseconds after the epoch. For that, I actually asked Github Copilot Chat to make a Node script for me that would read all the rows from a database table and then update them, and with some tweaks, the script worked really nicely
+- PG exports booleans as `“True”` and `“False”`, but SQLite wanted `true` and `false`
 
 There were a few raw SQL queries that I needed to change to make the SQL compatible with SQLite, for example:
 
-Learning `select count(1)` is not automatically given the name `count`
-Replacing `!= ALL(ARRAY(...))` with `NOT IN (...)`
-Replacing `current_date - interval ‘30’ day` by passing in a value calculated on the server
+- Learning `select count(1)` is not automatically given the name `count`
+- Replacing `!= ALL(ARRAY(...))` with `NOT IN (...)`
+- Replacing `current_date - interval ‘30’ day` by passing in a value calculated on the server
 
 Finally, I scp-ed my local SQLite file onto the server and I flipped the switch and everything worked!
 
